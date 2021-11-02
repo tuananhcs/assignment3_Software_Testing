@@ -105,6 +105,10 @@ class TinhTeAutomationTesting(unittest.TestCase):
         searchTextBox.send_keys(Keys.RETURN)
         # time.sleep(10)
 
+    def test_search_S0C(self):
+        """Search without a character."""
+        self.search_("")
+
     
 
     def tearDown(self):
