@@ -35,7 +35,7 @@ class DetailedEstimate(unittest.TestCase):
 
         # wait = WebDriverWait(self.driver, 10)
         # fieldValidator = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'field-validation-error')))
-        fieldValidator = self.driver.find_element_by_class_name('field-validation-error')
+        fieldValidator = self.driver.find_elements_by_class_name('input-validation-error')
         # elementxpath = self.driver.find_element(By.XPATH, "//span[@for='Length']")
         # validateMessage = self.driver.find_elements_by_class_name('validateMessage')
         print(len(fieldValidator))
