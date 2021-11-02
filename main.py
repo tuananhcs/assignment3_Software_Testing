@@ -8,20 +8,19 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-
-
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 class SeleniumDriver(object):
     def __init__(
         self,
-        # chromedriver path
-        driver_path='./chrome_driver/chromedriver_win32/chromedriver.exe',
         # pickle file path to store cookies
         cookies_file_path='./Cookies',
         # list of websites to reuse cookies with
         cookies_websites=["https://tinhte.vn"]
 
     ):
-        self.driver_path = driver_path
         self.cookies_file_path = cookies_file_path
         self.cookies_websites = cookies_websites
         chrome_options = webdriver.ChromeOptions()
@@ -78,28 +77,19 @@ class TinhTeAutomationTesting(unittest.TestCase):
         cService = Service(ChromeDriverManager().install())
         options = Options()
         options.add_argument("--log-level=3")
-        driver = webdriver.Chrome(options=options, service=cService)
-        self.driver = webdriver.Chrome(self.PATH)
+        self.driver = webdriver.Chrome(options=options, service=cService)
         self.driver.get("https://tinhte.vn")
 
         print("==========================START-TEST==========================")
 
     def login_(self):
-        # self.driver.close()
-        # seleniumObj = SeleniumDriver(driver_path=self.PATH)
-        # self.driver = seleniumObj.driver
-        # if tinhte_login(self.driver):
-        #     print("Already logged in")
-        # else:
-        #     print("Not logged in. Login")
-        #     seleniumObj.save_cookies()
         tinhte_login(self.driver)
 
     def search_(self, str):
-        searchButton = self.driver.find_element_by_class_name("placeholder")
+        searchButton = self.driver.find_element("placeholder")
         searchButton.click()
 
-        searchTextBox = self.driver.find_element_by_class_name(
+        searchTextBox = self.driver.find_element(
             "search-textbox")
         searchTextBox.send_keys(str)
         searchTextBox.send_keys(Keys.RETURN)
