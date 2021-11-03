@@ -1,0 +1,8 @@
+character="a"
+twospace="  "
+string_no_space="tuan anh"
+text_with_space="n a m h"
+special="@@"
+unicodeText="hé lô"
+link= "https://docs.google.com/spreadsheets/d/1lUkqHwKx7ufsrLoiDB2XkElOj5xtuREW/edit#gid=1472435703"
+foreignlanguage="ベトナム人"
