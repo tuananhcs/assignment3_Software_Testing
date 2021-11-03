@@ -38,7 +38,7 @@ class PythonOrgSearch(unittest.TestCase):
         assert search_results_page.is_results_found(), "No results found."
 
     def tearDown(self):
-        self.driver.close()
+        self.driver.quit()
 
 
 if __name__ == "__main__":
