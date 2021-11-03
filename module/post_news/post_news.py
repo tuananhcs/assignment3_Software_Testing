@@ -57,7 +57,6 @@ class DetailedEstimate(unittest.TestCase):
     def check_tieude(self):
         # sb= self.driver.find_elements(By.XPATH,"//input[@name='ctl00$LeftMainContent$GuestProductInsert$txtProductTitle']/following-sibling::div[0]/p")
         sb = self.driver.find_elements(By.XPATH,"//div[@class='leftArea leftPostArea']/div[2]/div[1]/p[1]")
-        print(len(sb))
         if len(sb) == 1:
             return False
         return True
