@@ -19,16 +19,10 @@ from selenium.webdriver.chrome.service import Service
 
 class DetailedEstimate(unittest.TestCase):
     def setUp(self):
-        # PATH = "C:\Program Files (x86)\chromedriver.exe"
-        # self.driver = webdriver.Chrome(PATH)
         cService = Service(ChromeDriverManager().install())
         options = Options()
         options.add_argument("--log-level=3")
         self.driver = webdriver.Chrome(options=options, service=cService)
-        # self.driver.set_page_load_timeout(10)
-        # self.driver.set_script_timeout(10)
-        # self.driver.implicitly_wait(10)
-        # self.driver.maximize_window()
         print("[Open browser] Open google chrome browser")
 
         print("========== [Begin Test] ==========")
@@ -51,36 +45,6 @@ class DetailedEstimate(unittest.TestCase):
         self.driver.find_element(By.NAME, "txtSenderEmail").clear()
         self.driver.find_element(By.NAME, "txtSenderContent").clear()
 
-    def isValidPhone(self, s):
-        reg = re.compile("^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$")
-        return reg.match(s)
-
-    def isValidEmail(self, s):
-        regex = re.compile("^[a-z0-9]+[\._]?[ a-z0-9]+[@]\w+[. ]\w{2,3}$")
-        return regex.match(s)
-
-    # def checkFill(self, field, value):
-    #     try:
-    #         fill = self.driver.find_element(By.NAME, field)
-    #         fill.send_keys(value)
-    #         fill.send_keys(Keys.ENTER)
-
-    #         self.pressSubmit()
-            
-    #         fieldValidator = self.driver.find_element(By.CLASS_NAME, "error-message".format(field))
-
-    #         if value == "":
-    #             print(fieldValidator.get_attribute("innerHTML"))
-    #             self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Vui lòng nhập số điện thoại hoặc email.")
-    #         elif field == "txtSenderMobile" and self.isValid(value) == False:
-    #             self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Số điện thoại nhập vào không đúng.")
-    #         elif field == "txtSenderEmail" and self.isValidEmail(value) == False:
-    #             self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Email không hợp lệ")
-    #     except:
-    #         if (field == "txtSenderMobile" and self.isValid(value) == True) or (field == "txtSenderEmail" and self.isValidEmail(value) == True):
-    #             self.assertTrue(True)
-    #         else:
-    #             self.assertTrue(False)
 
     def functionAccess(self):
         first = self.driver.find_element(By.XPATH, "//div[@id='product-lists-web']//a[@class='js__product-link-for-product-id']")
@@ -90,7 +54,134 @@ class DetailedEstimate(unittest.TestCase):
         time.sleep(5)
 
 
-    def test_RS1(self):
+    def test_input_name(self):
+        self.functionAccess()
+        self.fillForm("aa", "0123456789", "a@a.com", "aaa")
+        check = False
+        for _ in range(1,50):
+            try:
+                time.sleep(0.1)
+                fancyBox = self.driver.find_element(By.CLASS_NAME, "sending_code")
+                if fancyBox: 
+                    check = (fancyBox.get_attribute("innerHTML") == "Thành công")
+            except:
+                continue
+        self.assertTrue(check)
+    
+    def test_no_input_name(self):
+        self.functionAccess()
+        self.fillForm("", "0123456789", "a@a.com", "aaa")
+        for x in range(1,100):
+                time.sleep(0.1)
+                message = self.driver.find_elements(By.CLASS_NAME, "error-message")
+                if x == 99:
+                    if len(message) != 0:
+                        self.assertTrue(True)
+                    else:
+                        self.assertTrue(False)
+    
+    def test_valid_phonenumber(self):
+        self.functionAccess()
+        self.fillForm("aaa", "0706665088", "a@a.com", "aaa")
+        check = False
+        for x in range(1,50):
+            try:
+                time.sleep(0.1)
+                fancyBox = self.driver.find_element(By.CLASS_NAME, "sending_code")
+                if fancyBox: 
+                    check = (fancyBox.get_attribute("innerHTML") == "Thành công")
+            except:
+                continue
+        self.assertTrue(check)
+
+    def test_invalid_phonenumber(self):
+        self.functionAccess()
+        self.fillForm("aaa", "706665088", "a@a.com", "aaa")
+        for x in range(1,100):
+            time.sleep(0.1)
+            message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
+            print(len(message),x)
+            if x == 99:
+                if len(message)!=0: 
+                    self.assertTrue(True)
+                else:
+                    self.assertTrue(False)
+
+    def test_hotline_phonenumber(self):
+        self.functionAccess()
+        self.fillForm("aaa", "1900088816", "a@a.com", "aaa")
+        for x in range(1,100):
+            time.sleep(0.1)
+            message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
+            if x == 99:
+                if len(message)!=0: 
+                    self.assertTrue(True)
+                else:
+                    self.assertTrue(False)
+
+    def test_string_in_phonenumber(self):
+        self.functionAccess()
+        self.fillForm("aaa", "abc", "a@a.com", "aaa")
+        for x in range(1,100):
+            message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
+            if x == 99:
+                if len(message)!=0: 
+                    self.assertTrue(True)
+                else:
+                    self.assertTrue(False)
+
+    def test_no_input_phonenumber(self):
+        self.functionAccess()
+        self.fillForm("aaa", "", "a@a.com", "aaa")
+        for x in range(1,100):
+            time.sleep(0.1)
+            message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
+            print(len(message),x)
+            if x == 99:
+                if len(message)!=0: 
+                    self.assertTrue(True)
+                else:
+                    self.assertTrue(False)          
+
+    def test_valid_email(self):
+        self.functionAccess()
+        self.fillForm("aa", "0123456789", "aaa@gmail.com", "aaa")
+        check = False
+        for _ in range(1,50):
+            try:
+                time.sleep(0.1)
+                fancyBox = self.driver.find_element(By.CLASS_NAME, "sending_code")
+                if fancyBox: 
+                    check = (fancyBox.get_attribute("innerHTML") == "Thành công")
+            except:
+                continue
+        self.assertTrue(check)   
+
+    def test_invalid_email(self):
+        self.functionAccess()
+        self.fillForm("aaa", "0123456789", "123a.com", "aaa")
+        for x in range(1,100):
+            time.sleep(0.1)
+            message = self.driver.find_elements(By.ID, "validateFortxtSenderEmail")
+            if x == 99:
+                if len(message)!=0: 
+                    self.assertTrue(True)
+                else:
+                    self.assertTrue(False) 
+
+    def test_no_input_email(self):
+        self.functionAccess()
+        self.fillForm("aaa", "0123456789", "", "aaa")
+        for x in range(1,100):
+            time.sleep(0.1)
+            message = self.driver.find_elements(By.ID, "validateFortxtSenderEmail")
+            if x == 99:
+                if len(message)!=0: 
+                    self.assertTrue(True)
+                else:
+                    self.assertTrue(False)
+
+    def test_input_message(self):
         self.functionAccess()
         self.fillForm("aa", "0123456789", "a@a.com", "aaa")
         check = False
@@ -104,23 +195,22 @@ class DetailedEstimate(unittest.TestCase):
                 continue
         self.assertTrue(check)
 
-    # def test_RS1(self):
-    #     self.functionAccess()
-    #     self.fillForm("aa", "0123456789", "a@a.com", "aaa")
-    #     check = False
-    #     for x in range(1,20):
-    #         try:
-    #             time.sleep(100)
-    #             fancyBox = self.driver.find_element(By.CLASS_NAME, "sending_code")
-    #             if not fancyBox is None: check = True
-    #         except:
-    #             if check == True:
-    #                 self.assertTrue(fancyBox.get_attribute("innerHTML") == "Thành công")
-    #             else:
-    #                 self.assertTrue(False)   
+    def test_no_input_message(self):
+        self.functionAccess()
+        self.fillForm("aa", "0123456789", "a@a.com", "aaa")
+        check = False
+        for _ in range(1,50):
+            try:
+                time.sleep(0.1)
+                fancyBox = self.driver.find_element(By.CLASS_NAME, "sending_code")
+                if fancyBox: 
+                    check = (fancyBox.get_attribute("innerHTML") == "Thành công")
+            except:
+                continue
+        self.assertTrue(check)
 
     def tearDown(self):
-        # self.driver.quit()
+        self.driver.quit()
         print("========== [End Test] ==========\n")
 
 if __name__ == "__main__":
