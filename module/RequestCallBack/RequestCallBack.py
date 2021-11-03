@@ -1,4 +1,4 @@
-from re import match
+from re import S, match
 import time
 import os
 import re
@@ -35,7 +35,7 @@ class DetailedEstimate(unittest.TestCase):
         self.driver.get("https://batdongsan.com.vn/nha-dat-ban")
 
     def pressSubmit(self):
-        buttonSubmit = self.driver.find_element(By.LINK_TEXT, "Gửi yêu cầu")
+        buttonSubmit = self.driver.find_element(By.XPATH, './/button[@data-callback="onSubmit_FrontEnd_Product_Details_ContactBox_SendRequest"]')
         buttonSubmit.click()
 
     def fillForm(self, senderName, senderMobile, senderEmail, senderContext):
@@ -59,28 +59,28 @@ class DetailedEstimate(unittest.TestCase):
         regex = re.compile("^[a-z0-9]+[\._]?[ a-z0-9]+[@]\w+[. ]\w{2,3}$")
         return regex.match(s)
 
-    def checkFill(self, field, value):
-        try:
-            fill = self.driver.find_element(By.NAME, field)
-            fill.send_keys(value)
-            fill.send_keys(Keys.ENTER)
+    # def checkFill(self, field, value):
+    #     try:
+    #         fill = self.driver.find_element(By.NAME, field)
+    #         fill.send_keys(value)
+    #         fill.send_keys(Keys.ENTER)
 
-            self.pressSubmit()
+    #         self.pressSubmit()
             
-            fieldValidator = self.driver.find_element(By.CLASS_NAME, "error-message".format(field))
+    #         fieldValidator = self.driver.find_element(By.CLASS_NAME, "error-message".format(field))
 
-            if value == "":
-                print(fieldValidator.get_attribute("innerHTML"))
-                self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Vui lòng nhập số điện thoại hoặc email.")
-            elif field == "txtSenderMobile" and self.isValid(value) == False:
-                self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Số điện thoại nhập vào không đúng.")
-            elif field == "txtSenderEmail" and self.isValidEmail(value) == False:
-                self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Email không hợp lệ")
-        except:
-            if (field == "txtSenderMobile" and self.isValid(value) == True) or (field == "txtSenderEmail" and self.isValidEmail(value) == True):
-                self.assertTrue(True)
-            else:
-                self.assertTrue(False)
+    #         if value == "":
+    #             print(fieldValidator.get_attribute("innerHTML"))
+    #             self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Vui lòng nhập số điện thoại hoặc email.")
+    #         elif field == "txtSenderMobile" and self.isValid(value) == False:
+    #             self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Số điện thoại nhập vào không đúng.")
+    #         elif field == "txtSenderEmail" and self.isValidEmail(value) == False:
+    #             self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Email không hợp lệ")
+    #     except:
+    #         if (field == "txtSenderMobile" and self.isValid(value) == True) or (field == "txtSenderEmail" and self.isValidEmail(value) == True):
+    #             self.assertTrue(True)
+    #         else:
+    #             self.assertTrue(False)
 
     def functionAccess(self):
         first = self.driver.find_element(By.XPATH, "//div[@id='product-lists-web']//a[@class='js__product-link-for-product-id']")
@@ -90,21 +90,37 @@ class DetailedEstimate(unittest.TestCase):
         time.sleep(5)
 
 
-
     def test_RS1(self):
         self.functionAccess()
-        self.fillForm("aa", "0123456789", "ádd", "aaa")
+        self.fillForm("aa", "0123456789", "a@a.com", "aaa")
+        check = False
+        for _ in range(1,50):
+            try:
+                time.sleep(0.1)
+                fancyBox = self.driver.find_element(By.CLASS_NAME, "sending_code")
+                if fancyBox: 
+                    check = (fancyBox.get_attribute("innerHTML") == "Thành công")
+            except:
+                continue
+        self.assertTrue(check)
 
-        # result1 = self.driver.find_element(By.XPATH, './/div[@class="utils-result"]')
-        # h1 = result1.get_attribute('innerHTML')
-        # self.clearForm()
-        # self.fillForm(10, 10, 2, 2, 1)
-        # result2 = self.driver.find_element(By.XPATH, './/div[@class="utils-result"]')
-        # h2 = result2.get_attribute('innerHTML')
-        # self.assertTrue(h1 == h2)
+    # def test_RS1(self):
+    #     self.functionAccess()
+    #     self.fillForm("aa", "0123456789", "a@a.com", "aaa")
+    #     check = False
+    #     for x in range(1,20):
+    #         try:
+    #             time.sleep(100)
+    #             fancyBox = self.driver.find_element(By.CLASS_NAME, "sending_code")
+    #             if not fancyBox is None: check = True
+    #         except:
+    #             if check == True:
+    #                 self.assertTrue(fancyBox.get_attribute("innerHTML") == "Thành công")
+    #             else:
+    #                 self.assertTrue(False)   
 
     def tearDown(self):
-        self.driver.quit()
+        # self.driver.quit()
         print("========== [End Test] ==========\n")
 
 if __name__ == "__main__":
