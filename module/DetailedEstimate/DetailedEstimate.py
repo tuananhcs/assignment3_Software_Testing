@@ -30,7 +30,7 @@ class DetailedEstimate(unittest.TestCase):
         # self.driver.execute_cdp_cmd("Network.setCacheDisabled", {"cacheDisabled":True})
         # self.driver.set_page_load_timeout(10)
         # self.driver.set_script_timeout(10)
-        # self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(3)
         # self.driver.maximize_window()
         print("[Open browser] Open google chrome browser")
 
@@ -219,7 +219,7 @@ class DetailedEstimate(unittest.TestCase):
         result2 = self.driver.find_element(By.ID, 'tabResult4')
         h2 = result2.get_attribute('innerHTML')
         self.assertTrue(h1 == h2)
-
+    
     def test_RS2(self):
         self.fillForm(10, 10, 2, 2, 1)
         result1 = self.driver.find_element(By.ID, 'tabResult4')
