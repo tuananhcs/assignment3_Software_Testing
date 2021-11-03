@@ -56,7 +56,7 @@ class DetailedEstimate(unittest.TestCase):
 
     def test_input_name(self):
         self.functionAccess()
-        self.fillForm("aa", "0123456789", "a@a.com", "aaa")
+        self.fillForm("aa", "0123456789", "aaa@gmail.com", "aaa")
         check = False
         for _ in range(1,50):
             try:
@@ -70,19 +70,21 @@ class DetailedEstimate(unittest.TestCase):
     
     def test_no_input_name(self):
         self.functionAccess()
-        self.fillForm("", "0123456789", "a@a.com", "aaa")
-        for x in range(1,100):
+        self.fillForm("", "0123456789", "aaa@gmail.com", "aaa")
+        check = False
+        for _ in range(1,50):
+            try:
                 time.sleep(0.1)
-                message = self.driver.find_elements(By.CLASS_NAME, "error-message")
-                if x == 99:
-                    if len(message) != 0:
-                        self.assertTrue(True)
-                    else:
-                        self.assertTrue(False)
+                fancyBox = self.driver.find_element(By.CLASS_NAME, "sending_code")
+                if fancyBox: 
+                    check = (fancyBox.get_attribute("innerHTML") == "Thành công")
+            except:
+                continue
+        self.assertTrue(check)
     
     def test_valid_phonenumber(self):
         self.functionAccess()
-        self.fillForm("aaa", "0706665088", "a@a.com", "aaa")
+        self.fillForm("aaa", "0706665088", "aaa@gmail.com", "aaa")
         check = False
         for x in range(1,50):
             try:
@@ -96,7 +98,7 @@ class DetailedEstimate(unittest.TestCase):
 
     def test_invalid_phonenumber(self):
         self.functionAccess()
-        self.fillForm("aaa", "706665088", "a@a.com", "aaa")
+        self.fillForm("aaa", "706665088", "aaa@gmail.com", "aaa")
         for x in range(1,100):
             time.sleep(0.1)
             message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
@@ -109,7 +111,7 @@ class DetailedEstimate(unittest.TestCase):
 
     def test_hotline_phonenumber(self):
         self.functionAccess()
-        self.fillForm("aaa", "1900088816", "a@a.com", "aaa")
+        self.fillForm("aaa", "1900088816", "aaa@gmail.com", "aaa")
         for x in range(1,100):
             time.sleep(0.1)
             message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
@@ -121,7 +123,7 @@ class DetailedEstimate(unittest.TestCase):
 
     def test_string_in_phonenumber(self):
         self.functionAccess()
-        self.fillForm("aaa", "abc", "a@a.com", "aaa")
+        self.fillForm("aaa", "abc", "aaa@gmail.com", "aaa")
         for x in range(1,100):
             message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
             if x == 99:
@@ -132,7 +134,7 @@ class DetailedEstimate(unittest.TestCase):
 
     def test_no_input_phonenumber(self):
         self.functionAccess()
-        self.fillForm("aaa", "", "a@a.com", "aaa")
+        self.fillForm("aaa", "", "aaa@gmail.com", "aaa")
         for x in range(1,100):
             time.sleep(0.1)
             message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
@@ -183,7 +185,7 @@ class DetailedEstimate(unittest.TestCase):
 
     def test_input_message(self):
         self.functionAccess()
-        self.fillForm("aa", "0123456789", "a@a.com", "aaa")
+        self.fillForm("aa", "0123456789", "aaa@gmail.com", "aaa")
         check = False
         for _ in range(1,50):
             try:
@@ -197,7 +199,7 @@ class DetailedEstimate(unittest.TestCase):
 
     def test_no_input_message(self):
         self.functionAccess()
-        self.fillForm("aa", "0123456789", "a@a.com", "aaa")
+        self.fillForm("aa", "0123456789", "aaa@gmail.com", "aaa")
         check = False
         for _ in range(1,50):
             try:
