@@ -1,2 +1,12 @@
-username = "huy.lam2214@hcmut.edu.vn"
-password="Lamhuy213"
+username = "anhpltlop9a2@gmail.com"
+password="Plt123anh"
+
+name="Tuan Anh"
+
+unicodeString = "Hé lô"
+
+special = "@@ < 3"
+
+iconString = "@@"
+
+foreign = "ベトナム人"
