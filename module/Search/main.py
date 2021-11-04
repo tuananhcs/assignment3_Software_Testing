@@ -80,7 +80,7 @@ class PythonOrgSearch(unittest.TestCase):
         """Search without a character and  select "Bất động sản gần bạn " """
         time.sleep(2)
         self.clickSearchBar()
-        time.sleep(2)
+        time.sleep(3)
         self.driver.find_element(By.CLASS_NAME, "ui-menu-item").find_element(By.TAG_NAME, "a").find_element(By.TAG_NAME, "span").click()
         self.clickSearchButton()
 
@@ -103,9 +103,9 @@ class PythonOrgSearch(unittest.TestCase):
         time.sleep(2)
         self.driver.find_elements(
             By.CLASS_NAME, "select-text.select-custom")[2].click()
-        time.sleep(2)
-        print(self.driver.find_element(By.ID, "divPriceOptions").find_element(
-            By.TAG_NAME, "ul").find_elements(By.TAG_NAME, "li")[1].get_attribute("innerHTML"))
+        time.sleep(3)
+        # print(self.driver.find_element(By.ID, "divPriceOptions").find_element(
+        #     By.TAG_NAME, "ul").find_elements(By.TAG_NAME, "li")[1].get_attribute("innerHTML"))
         self.driver.find_element(By.ID, "divPriceOptions").find_element(By.TAG_NAME, "ul").find_elements(By.TAG_NAME, "li")[1].click()
         self.clickSearchButton()
         #time.sleep(2)
@@ -127,6 +127,7 @@ class PythonOrgSearch(unittest.TestCase):
             By.CLASS_NAME, "select-text.select-custom")[3].click()
         time.sleep(2)
         self.driver.find_element(By.ID, "txtAreaMinValue").send_keys("100")
+        time.sleep(2)
         self.driver.find_element(By.ID, "txtAreaMaxValue").send_keys("200")
         time.sleep(2)
         self.clickSearchButton()
@@ -160,7 +161,7 @@ class PythonOrgSearch(unittest.TestCase):
     def test_NPX001(self):
         """ Search without a character and  select "Phường xã" """
         self.select_city_distric_town()
-        time.sleep(0.5)
+        time.sleep(1.5)
         self.driver.find_element(
             By.CLASS_NAME, "re__btn.re__btn-pr-ghost-inverted--sm.re__btn-icon-right--sm.filter-more").click()
         time.sleep(0.5)
@@ -191,7 +192,7 @@ class PythonOrgSearch(unittest.TestCase):
 
     def test_NHNP001(self):
         """ Search without a character and  select "Hướng nhà" """
-        time.sleep(2)
+        time.sleep(3)
         self.driver.find_element(By.CLASS_NAME, "re__btn.re__btn-pr-ghost-inverted--sm.re__btn-icon-right--sm.filter-more").click()
         time.sleep(2)
         #click so phong
@@ -205,7 +206,7 @@ class PythonOrgSearch(unittest.TestCase):
 
     def test_NHNP002(self):
         """ Search without a character and  select "Hướng nhà" """
-        time.sleep(2)
+        time.sleep(3)
         self.driver.find_element(
             By.CLASS_NAME, "re__btn.re__btn-pr-ghost-inverted--sm.re__btn-icon-right--sm.filter-more").click()
         time.sleep(2)
