@@ -45,8 +45,14 @@ class PythonSearch(unittest.TestCase):
         self.driver.find_element(
             By.CLASS_NAME, "menu-user-child.show").find_elements(By.TAG_NAME,"li")[1].click()
         time.sleep(5)
+    
     def test_01(self):
         self.login()
+        self.find_element(By.ID, "txtFullname").clear()
+        self.find_element(By.ID, "MainContent__userPage_ctl00_btnSave").click()
+        error = self.find_element(
+            By.ID, "errorFullName").get_atrribute('innerHTML')
+        self.assertTrue(error == "Bạn cần nhập thông tin")
 
     def tearDown(self):
         self.driver.quit()
