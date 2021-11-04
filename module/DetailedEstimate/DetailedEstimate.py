@@ -109,55 +109,55 @@ class DetailedEstimate(unittest.TestCase):
         else:
             return False
     
-    # def test_CD1(self):
-    #     houseLength = -1
-    #     self.fillForm(houseLength, 10, 2, 2, 1)
-    #     self.checkAlert("Length", houseLength)
+    def test_CD1(self):
+        houseLength = -1
+        self.fillForm(houseLength, 10, 2, 2, 1)
+        self.checkAlert("Length", houseLength)
     
-    # def test_CD2(self):
-    #     houseLength = 10
-    #     self.fillForm(houseLength, 10, 2, 2, 1)
-    #     self.checkAlert("Length", houseLength)
+    def test_CD2(self):
+        houseLength = 10
+        self.fillForm(houseLength, 10, 2, 2, 1)
+        self.checkAlert("Length", houseLength)
 
-    # def test_CD3(self):
-    #     houseLength = 51
-    #     self.fillForm(houseLength, 10, 2, 2, 1)
-    #     self.checkAlert("Length", houseLength)
+    def test_CD3(self):
+        houseLength = 51
+        self.fillForm(houseLength, 10, 2, 2, 1)
+        self.checkAlert("Length", houseLength)
 
-    # def test_CD4(self):
-    #     houseLength = "a"
-    #     self.fillForm(houseLength, 10, 2, 2, 1)
-    #     self.checkAlert("Length", houseLength)
+    def test_CD4(self):
+        houseLength = "a"
+        self.fillForm(houseLength, 10, 2, 2, 1)
+        self.checkAlert("Length", houseLength)
 
-    # def test_CD5(self):
-    #     houseLength = ""
-    #     self.fillForm(houseLength, 10, 2, 2, 1)
-    #     self.checkAlert("Length", houseLength)
+    def test_CD5(self):
+        houseLength = ""
+        self.fillForm(houseLength, 10, 2, 2, 1)
+        self.checkAlert("Length", houseLength)
 
-    # def test_CR1(self):
-    #     houseWidth = -1
-    #     self.fillForm(10, houseWidth, 2, 2, 1)
-    #     self.checkAlert("Width", houseWidth)
+    def test_CR1(self):
+        houseWidth = -1
+        self.fillForm(10, houseWidth, 2, 2, 1)
+        self.checkAlert("Width", houseWidth)
     
-    # def test_CR2(self):
-    #     houseWidth = 10
-    #     self.fillForm(10, houseWidth, 2, 2, 1)
-    #     self.checkAlert("Width", houseWidth)
+    def test_CR2(self):
+        houseWidth = 10
+        self.fillForm(10, houseWidth, 2, 2, 1)
+        self.checkAlert("Width", houseWidth)
 
-    # def test_CR3(self):
-    #     houseWidth = 51
-    #     self.fillForm(10, houseWidth, 2, 2, 1)
-    #     self.checkAlert("Width", houseWidth)
+    def test_CR3(self):
+        houseWidth = 51
+        self.fillForm(10, houseWidth, 2, 2, 1)
+        self.checkAlert("Width", houseWidth)
 
-    # def test_CR4(self):
-    #     houseWidth = "a"
-    #     self.fillForm(10, houseWidth, 2, 2, 1)
-    #     self.checkAlert("Width", houseWidth)
+    def test_CR4(self):
+        houseWidth = "a"
+        self.fillForm(10, houseWidth, 2, 2, 1)
+        self.checkAlert("Width", houseWidth)
 
-    # def test_CR5(self):
-    #     houseWidth = ""
-    #     self.fillForm(10, houseWidth, 2, 2, 1)
-    #     self.checkAlert("Width", houseWidth)
+    def test_CR5(self):
+        houseWidth = ""
+        self.fillForm(10, houseWidth, 2, 2, 1)
+        self.checkAlert("Width", houseWidth)
 
     def test_STC1(self):
         houseStageNumber = -1
@@ -184,119 +184,119 @@ class DetailedEstimate(unittest.TestCase):
         self.fillForm(10, 10, houseStageNumber, 2, 1)
         self.checkAlert("StageNumber", houseStageNumber)
 
-    # def test_CCMT1(self):
-    #     houseStageHeight = -1
-    #     self.fillForm(10, 10, 2, houseStageHeight, 1)
-    #     self.checkAlert("StageHeight", houseStageHeight)
+    def test_CCMT1(self):
+        houseStageHeight = -1
+        self.fillForm(10, 10, 2, houseStageHeight, 1)
+        self.checkAlert("StageHeight", houseStageHeight)
     
-    # def test_CCMT2(self):
-    #     houseStageHeight = 4
-    #     self.fillForm(10, 10, 2, houseStageHeight, 1)
-    #     self.checkAlert("StageHeight", houseStageHeight)
+    def test_CCMT2(self):
+        houseStageHeight = 4
+        self.fillForm(10, 10, 2, houseStageHeight, 1)
+        self.checkAlert("StageHeight", houseStageHeight)
 
-    # def test_CCMT3(self):
-    #     houseStageHeight = 10
-    #     self.fillForm(10, 10, 2, houseStageHeight, 1)
-    #     self.checkAlert("StageHeight", houseStageHeight)
+    def test_CCMT3(self):
+        houseStageHeight = 10
+        self.fillForm(10, 10, 2, houseStageHeight, 1)
+        self.checkAlert("StageHeight", houseStageHeight)
 
-    # def test_CCMT4(self):
-    #     houseStageHeight = "a"
-    #     self.fillForm(10, 10, 2, houseStageHeight, 1)
-    #     self.checkAlert("StageHeight", houseStageHeight)
+    def test_CCMT4(self):
+        houseStageHeight = "a"
+        self.fillForm(10, 10, 2, houseStageHeight, 1)
+        self.checkAlert("StageHeight", houseStageHeight)
 
-    # def test_CCMT5(self):
-    #     houseStageHeight = ""
-    #     self.fillForm(10, 10, 2, houseStageHeight, 1)
-    #     self.checkAlert("StageHeight", houseStageHeight)
+    def test_CCMT5(self):
+        houseStageHeight = ""
+        self.fillForm(10, 10, 2, houseStageHeight, 1)
+        self.checkAlert("StageHeight", houseStageHeight)
 
-    # def test_LMN1(self):
-    #     rooftype = self.driver.find_element(By.XPATH, './/select[@id="RoofType"]')
-    #     self.pressSubmit()
+    def test_LMN1(self):
+        rooftype = self.driver.find_element(By.XPATH, './/select[@id="RoofType"]')
+        self.pressSubmit()
     
-    # def test_LMN2(self):
-    #     rooftype = self.driver.find_element(By.XPATH, './/select[@id="RoofType"]')
-    #     rooftype.click()
-    #     Select(rooftype).select_by_value(rooftype.get_attribute("value"))
-    #     self.pressSubmit()
+    def test_LMN2(self):
+        rooftype = self.driver.find_element(By.XPATH, './/select[@id="RoofType"]')
+        rooftype.click()
+        Select(rooftype).select_by_value(rooftype.get_attribute("value"))
+        self.pressSubmit()
 
-    # def test_LMN3(self):
-    #     rooftype = self.driver.find_element(By.XPATH, './/select[@id="RoofType"]')
-    #     rooftype.click()
-    #     Select(rooftype).select_by_value("3")
-    #     self.pressSubmit()
+    def test_LMN3(self):
+        rooftype = self.driver.find_element(By.XPATH, './/select[@id="RoofType"]')
+        rooftype.click()
+        Select(rooftype).select_by_value("3")
+        self.pressSubmit()
 
-    # def test_RS1(self):
-    #     self.fillForm(10, 10, 2, 2, 1)
-    #     result1 = self.driver.find_element(By.ID, 'tabResult4')
-    #     h1 = result1.get_attribute('innerHTML')
-    #     self.clearForm()
-    #     self.fillForm(10, 10, 2, 2, 1)
-    #     result2 = self.driver.find_element(By.ID, 'tabResult4')
-    #     h2 = result2.get_attribute('innerHTML')
-    #     self.assertTrue(h1 == h2)
+    def test_RS1(self):
+        self.fillForm(10, 10, 2, 2, 1)
+        result1 = self.driver.find_element(By.ID, 'tabResult4')
+        h1 = result1.get_attribute('innerHTML')
+        self.clearForm()
+        self.fillForm(10, 10, 2, 2, 1)
+        result2 = self.driver.find_element(By.ID, 'tabResult4')
+        h2 = result2.get_attribute('innerHTML')
+        self.assertTrue(h1 == h2)
     
-    # def test_RS2(self):
-    #     self.fillForm(10, 10, 2, 2, 1)
-    #     result1 = self.driver.find_element(By.ID, 'tabResult4')
-    #     h1 = result1.get_attribute('innerHTML')
-    #     # self.driver.get(self.driver.current_url)
-    #     time.sleep(3)
-    #     self.pressSubmit()
-    #     i = 3
-    #     alert_displayed = False
-    #     while i > 0:
-    #         time.sleep(1)
-    #         self.driver.refresh()
-    #         # self.driver.find_element(By.NAME, "s").send_keys(Keys.F5)
-    #         try:
-    #             wait = WebDriverWait(self.driver, 10)
-    #             wait.until(EC.alert_is_present())
-    #             alert_displayed = True
-    #         except:
-    #             i = i - 1
-    #     if alert_displayed == False:
-    #         print("Alert not show")
-    #         self.assertTrue(False)
-    #     alert = self.driver.switch_to.alert
-    #     if alert.is_displayed():
-    #         alert.accept()
-    #     else:
-    #         self.assertTrue(False)
-    #         self.driver.switch_to
-    #     self.driver.switch_to.window(self.driver.window_handles[0])
-    #     result2 = self.driver.find_element(By.ID, 'tabResult4')
-    #     h2 = result2.get_attribute('innerHTML')
-    #     self.assertTrue(h1 == h2)
+    def test_RS2(self):
+        self.fillForm(10, 10, 2, 2, 1)
+        result1 = self.driver.find_element(By.ID, 'tabResult4')
+        h1 = result1.get_attribute('innerHTML')
+        # self.driver.get(self.driver.current_url)
+        time.sleep(3)
+        self.pressSubmit()
+        i = 3
+        alert_displayed = False
+        while i > 0:
+            time.sleep(1)
+            self.driver.refresh()
+            # self.driver.find_element(By.NAME, "s").send_keys(Keys.F5)
+            try:
+                wait = WebDriverWait(self.driver, 10)
+                wait.until(EC.alert_is_present())
+                alert_displayed = True
+            except:
+                i = i - 1
+        if alert_displayed == False:
+            print("Alert not show")
+            self.assertTrue(False)
+        alert = self.driver.switch_to.alert
+        if alert.is_displayed():
+            alert.accept()
+        else:
+            self.assertTrue(False)
+            self.driver.switch_to
+        self.driver.switch_to.window(self.driver.window_handles[0])
+        result2 = self.driver.find_element(By.ID, 'tabResult4')
+        h2 = result2.get_attribute('innerHTML')
+        self.assertTrue(h1 == h2)
 
-    # def test_RS3(self):
-    #     self.fillForm(10, 10, 2, 2, 1)
-    #     result1 = self.driver.find_element(By.ID, 'tabResult4')
-    #     h1 = result1.get_attribute('innerHTML')
-    #     self.clearForm()
-    #     self.fillForm(10, 10, 2, 2, 1)
-    #     result2 = self.driver.find_element(By.ID, 'tabResult4')
-    #     h2 = result2.get_attribute('innerHTML')
-    #     self.assertTrue(h1 == h2)
+    def test_RS3(self):
+        self.fillForm(10, 10, 2, 2, 1)
+        result1 = self.driver.find_element(By.ID, 'tabResult4')
+        h1 = result1.get_attribute('innerHTML')
+        self.clearForm()
+        self.fillForm(10, 10, 2, 2, 1)
+        result2 = self.driver.find_element(By.ID, 'tabResult4')
+        h2 = result2.get_attribute('innerHTML')
+        self.assertTrue(h1 == h2)
 
-    # def test_UN1(self):
-    #     self.fillForm(10, 10, 2, 2, 1)
-    #     self.driver.find_element(By.ID, 'tabResult4')
-    #     child_results = self.driver.find_elements(By.CLASS_NAME, 'result_chiphi_item')
+    def test_UN1(self):
+        self.fillForm(10, 10, 2, 2, 1)
+        self.driver.find_element(By.ID, 'tabResult4')
+        child_results = self.driver.find_elements(By.CLASS_NAME, 'result_chiphi_item')
 
-    #     check = True
+        check = True
 
-    #     check = check and self.checkUnit(child_results[0].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
-    #     check = check and self.checkUnit(child_results[1].find_element(By.XPATH, './/div[@class="column3"]/div'), "viên")
-    #     check = check and self.checkUnit(child_results[2].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
-    #     check = check and self.checkUnit(child_results[3].find_element(By.XPATH, './/div[@class="column3"]/div'), "m3")
-    #     check = check and self.checkUnit(child_results[4].find_element(By.XPATH, './/div[@class="column3"]/div'), "m3")
-    #     check = check and self.checkUnit(child_results[5].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
-    #     check = check and self.checkUnit(child_results[6].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
-    #     check = check and self.checkUnit(child_results[7].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
-    #     check = check and self.checkUnit(child_results[8].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
-    #     check = check and self.checkUnit(child_results[9].find_element(By.XPATH, './/div[@class="column3"]/div'), "m2")
+        check = check and self.checkUnit(child_results[0].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
+        check = check and self.checkUnit(child_results[1].find_element(By.XPATH, './/div[@class="column3"]/div'), "viên")
+        check = check and self.checkUnit(child_results[2].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
+        check = check and self.checkUnit(child_results[3].find_element(By.XPATH, './/div[@class="column3"]/div'), "m3")
+        check = check and self.checkUnit(child_results[4].find_element(By.XPATH, './/div[@class="column3"]/div'), "m3")
+        check = check and self.checkUnit(child_results[5].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
+        check = check and self.checkUnit(child_results[6].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
+        check = check and self.checkUnit(child_results[7].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
+        check = check and self.checkUnit(child_results[8].find_element(By.XPATH, './/div[@class="column3"]/div'), "kg")
+        check = check and self.checkUnit(child_results[9].find_element(By.XPATH, './/div[@class="column3"]/div'), "m2")
 
-    #     self.assertTrue(check)
+        self.assertTrue(check)
 
     def tearDown(self):
         self.driver.quit()
