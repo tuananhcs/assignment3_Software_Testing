@@ -25,6 +25,10 @@ class CustomProfile(unittest.TestCase):
         self.special = mydata.special
         self.iconString = mydata.iconString
         self.foreign = mydata.foreign
+        self.manualname = mydata.manualname
+        self.taxcode = mydata.taxcode
+        self.phone = mydata.phone
+        self.notregisterphone = mydata.notregisterphone
 
 
         cService = Service(ChromeDriverManager().install())
@@ -46,9 +50,9 @@ class CustomProfile(unittest.TestCase):
         self.driver.delete_all_cookies()
 
     def login_and_goto_profile(self):
-        time.sleep(0.5)
+        time.sleep(1)
         self.driver.find_element(by=By.ID, value="kct_login").click()
-        time.sleep(0.5)
+        time.sleep(1)
         self.driver.find_element(
             by=By.ID, value="UserName").send_keys(self.username)
         self.driver.find_element(
@@ -76,113 +80,539 @@ class CustomProfile(unittest.TestCase):
     def select_Distric(self): 
         self.driver.find_element(By.ID, "ddlDistricts").find_elements(
             By.TAG_NAME, "option")[1].click()
+    
+    def default_name(self): 
+        self.driver.find_element(
+            By.ID, "txtFullname").clear()
+        self.driver.find_element(
+            By.ID, "txtFullname").send_keys(self.name)
+        time.sleep(0.5)
 
+    def clearData(self): 
+        self.driver.find_element(By.ID, "ddlWards").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.driver.find_element(By.ID, "ddlStreets").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.driver.find_element(By.ID, "txtManualName").clear()
+        self.driver.find_element(By.ID, "txtSkypeIM").clear()
+        self.driver.find_element(By.ID, "txtZalo").clear()
+        self.driver.find_element(By.ID, "txtViber").clear()
+        self.driver.find_element(By.ID, "txtTaxCode").clear()
+     
+    
     def select_default_field(self):
         self.select_City()
         self.select_Distric()
 
-    # def test_0(self):
-    #     """Edit the same data in any field"""
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     #self.press_save_button()
-    #     time.sleep(5)
+    
+    
+    def test_RLP(self): 
+        self.login_and_goto_profile()
+        self.default_name()
+        self.select_default_field()
+        self.press_save_button()
+        self.driver.refresh()
+        assert True
 
-    # def test_SDT(self):
-    #     """Edit the same data in any field"""
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     self.press_save_button()
-    #     sucess_notification = self.driver.find_element(
-    #         By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
-    #     ############################################3
-    #     self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
-    #     time.sleep(5)
+    def test_EDP(self): 
+        self.default_name()
+        self.select_default_field()
+        assert True
+
+    def test_TOB(self):
+        assert True
+
+    def test_SDT(self):
+        """Edit the same data in any field"""
+        self.login_and_goto_profile()
+        self.select_default_field()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(
+            By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+        ############################################3
+        self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
+        time.sleep(5)
 
 
-    # def test_DF(self):
-    #     """Don't fill in "Họ và tên" field """
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     self.driver.find_element(By.ID, "txtFullname").clear()
-    #     self.press_save_button()
-    #     error = self.driver.find_element(
-    #         By.ID, "errorFullName").get_attribute('innerHTML')
-    #     self.assertTrue(error == "Bạn cần nhập thông tin")
+    def test_DF(self):
+        """Don't fill in "Họ và tên" field """
+        self.login_and_goto_profile()
+        self.select_default_field()
+        self.driver.find_element(By.ID, "txtFullname").clear()
+        self.press_save_button()
+        error = self.driver.find_element(
+            By.ID, "errorFullName").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần nhập thông tin")
        
 
     
 
-    # def test_PDF(self):
-    #     """Press "Họ và tên" field but  don't fill data"""
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     self.driver.find_element(By.ID, "txtFullname").click()
-    #     time.sleep(2)
-    #     self.press_save_button()
-    #     error = self.driver.find_element(
-    #         By.ID, "errorFullName").get_attribute('innerHTML')
-    #     self.assertTrue(error != "Bạn cần nhập thông tin")
+    def test_PDF(self):
+        """Press "Họ và tên" field but  don't fill data"""
+        self.login_and_goto_profile()
+        self.select_default_field()
+        self.driver.find_element(By.ID, "txtFullname").click()
+        time.sleep(2)
+        self.press_save_button()
+        error = self.driver.find_element(
+            By.ID, "errorFullName").get_attribute('innerHTML')
+        self.assertTrue(error != "Bạn cần nhập thông tin")
 
-    # def test_FIU(self):
-    #     """Fill valid "Họ và tên"  """
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     self.driver.find_element(By.ID, "txtFullname").clear()
-    #     self.driver.find_element(By.ID, "txtFullname").send_keys(self.name)
-    #     time.sleep(0.5)
-    #     self.press_save_button()
-    #     sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
-    #     self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
+    def test_FIU(self):
+        """Fill valid "Họ và tên"  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.driver.find_element(By.ID, "txtFullname").clear()
+        self.driver.find_element(By.ID, "txtFullname").send_keys(self.name)
+        time.sleep(0.5)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
 
-    # def test_FIUC1(self):
-    #     """Fill  "Họ và tên"   with unicode"  """
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     self.driver.find_element(By.ID, "txtFullname").clear()
-    #     self.driver.find_element(By.ID, "txtFullname").send_keys(self.unicodeString)
-    #     time.sleep(0.5)
-    #     self.press_save_button()
-    #     sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
-    #     self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
+    def test_FIUC1(self):
+        """Fill  "Họ và tên"   with unicode"  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.driver.find_element(By.ID, "txtFullname").clear()
+        self.driver.find_element(By.ID, "txtFullname").send_keys(self.unicodeString)
+        time.sleep(0.5)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
 
-    # def test_FIUC2(self):
-    #     """Fill "Họ và tên"   with special character and number"  """
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     self.driver.find_element(By.ID, "txtFullname").clear()
-    #     self.driver.find_element(By.ID, "txtFullname").send_keys(self.special)
-    #     time.sleep(0.5)
-    #     self.press_save_button()
-    #     sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
-    #     self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
+    def test_FIUC2(self):
+        """Fill "Họ và tên"   with special character and number"  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.driver.find_element(By.ID, "txtFullname").clear()
+        self.driver.find_element(By.ID, "txtFullname").send_keys(self.special)
+        time.sleep(0.5)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
 
-    # def test_FIUC3(self):
-    #     """Fill  "Họ và tên"   with icon"  """
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     self.driver.find_element(
-    #         By.ID, "txtFullname").clear()
-    #     self.driver.find_element(By.ID, "txtFullname").send_keys(self.iconString)
-    #     time.sleep(0.5)
-    #     self.press_save_button()
-    #     error = self.driver.find_element(By.ID, "errorFullName").get_attribute('innerHTML')
-    #     print(error)
-    #     self.assertTrue(error == "Bạn cần nhập thông tin")
+    def test_FIUC3(self):
+        """Fill  "Họ và tên"   with icon"  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.driver.find_element(
+            By.ID, "txtFullname").clear()
+        self.driver.find_element(By.ID, "txtFullname").send_keys(self.iconString)
+        time.sleep(0.5)
+        self.press_save_button()
+        error = self.driver.find_element(By.ID, "errorFullName").get_attribute('innerHTML')
+        print(error)
+        self.assertTrue(error == "Bạn cần nhập thông tin")
 
-    # def test_FFLN(self):
-    #     """Fill  "Họ và tên" with hieroglyphics character  """
-    #     self.login_and_goto_profile()
-    #     self.select_default_field()
-    #     self.driver.find_element(
-    #         By.ID, "txtFullname").clear()
-    #     self.driver.find_element(
-    #         By.ID, "txtFullname").send_keys(self.foreign)
-    #     time.sleep(0.5)
-    #     self.press_save_button()
-    #     error = self.driver.find_element(
-    #         By.ID, "errorFullName").get_attribute('innerHTML')
-    #     self.assertTrue(error == "Bạn cần nhập lại \"Họ tên\" cho đúng")
+    def test_FFLN(self):
+        """Fill  "Họ và tên" with hieroglyphics character  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.driver.find_element(
+            By.ID, "txtFullname").clear()
+        self.driver.find_element(
+            By.ID, "txtFullname").send_keys(self.foreign)
+        time.sleep(0.5)
+        self.press_save_button()
+        error = self.driver.find_element(
+            By.ID, "errorFullName").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần nhập lại \"Họ tên\" cho đúng")
+
+    def test_DFTTG1(self):
+        """Don't fill in "Tên thường gọi" field   """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_DFTTG2(self):
+        """Press "Tên thường gọi" field but  don't fill data  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.ID, "txtManualName").click()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+       
+    def test_FIU(self):
+        """Fill valid "Tên thường gọi"   """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtManualName").send_keys(self.manualname)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
+
+    def test_DSNS(self):
+        """Don't select "Ngày sinh"   """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+     
+    def test_SNS(self):
+        """Select "Ngày sinh"   """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "MainContent__userPage_ctl00_txtBirthDates").click()
+        #print(self.driver.find_element(By.CLASS_NAME, "ui-datepicker-calendar").find_element(By.TAG_NAME, "tbody").find_elements(By.TAG_NAME, "tr")[0].find_elements(By.TAG_NAME, "td")[5].find_element(By.TAG_NAME, "a"))
+        self.driver.find_element(By.CLASS_NAME, "ui-datepicker-calendar").find_element(By.TAG_NAME, "tbody").find_elements(By.TAG_NAME, "tr")[0].find_elements(By.TAG_NAME, "td")[5].find_element(By.TAG_NAME, "a").click()
+        time.sleep(3)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_NSTTP(self):
+        """No select data in "Tỉnh, Thành phố " field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.driver.find_element(By.ID, "ddlCities").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.default_name()
+        self.press_save_button()
+        error = self.driver.find_element(By.ID, "errorCity").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần chọn thông tin")
+
+    def test_STTP(self):
+        """Select data in "Tỉnh, Thành phố " field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.driver.find_element(By.ID, "ddlCities").find_elements(
+            By.TAG_NAME, "option")[2].click()
+        self.select_Distric()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+    def test_NSQH(self):
+        """No select data in "Quận, huyện " field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.driver.find_element(By.ID, "ddlCities").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.default_name()
+        self.press_save_button()
+        error = self.driver.find_element(
+            By.ID, "errorCity").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần chọn thông tin")
+
+    def test_SQH(self):
+        """Select data in "Quận, huyện " field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_City()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[2].click()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification=="Thay đổi thông tin thành công !")
+
+    def test_NSPX(self):
+        """No select data in "Phường, xã " field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.driver.find_element(By.ID, "ddlCities").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.default_name()
+        self.press_save_button()
+        error = self.driver.find_element(
+            By.ID, "errorCity").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần chọn thông tin")
+
+    def test_SPX(self):
+        """Select data in "Phường, xã " field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_City()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[2].click()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification=="Thay đổi thông tin thành công !")
+
+    def test_NSDP(self):
+        """No select data in "Đường, phố " field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.driver.find_element(By.ID, "ddlCities").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.default_name()
+        self.press_save_button()
+        error = self.driver.find_element(
+            By.ID, "errorCity").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần chọn thông tin")
+
+    def test_SDP(self):
+        """Select data in "Đường, phố " field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_City()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[2].click()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification=="Thay đổi thông tin thành công !")
+
+    def test_SDDC(self):
+        """Select default "Địa chỉ" """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.driver.find_element(By.ID, "ddlCities").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[0].click()
+        self.default_name()
+        self.press_save_button()
+        error = self.driver.find_element(
+            By.ID, "errorCity").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần chọn thông tin")
+
+    def test_FDC(self):
+        """Fill in "Địa chỉ" field"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_City()
+        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
+            By.TAG_NAME, "option")[2].click()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_DFCMND(self):
+        """Don't fill in "Mã số thuế/CMND" field    """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_DFFCMND(self):
+        """Press "Mã số thuế/CMND" field but  don't fill data  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.ID, "txtTaxCode").click()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_FIU(self):
+        """Fill valid "Mã số thuế/CMND"     """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtTaxCode").send_keys(self.taxcode)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
+
+    def test_DFSIM(self):
+        """Don't fill in "Skype IM" field     """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_PSIADFD(self):
+        """Press "Skype IM" field but  don't fill data """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.ID, "txtSkypeIM").click()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_FIU(self):
+        """Fill valid "Skype IM" """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtSkypeIM").send_keys(self.taxcode)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+    
+    def test_DFZ(self):
+        """Don't fill in "zalo" field      """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_PDFZ(self):
+        """Press "zalo" field but  don't fill data"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.ID, "txtZalo").click()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_FTZ(self):
+        """Fill text in Zalo  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtZalo").send_keys("a")
+        assert True
+    
+    def test_FPNR(self):
+        """Fill phone number not register zalo   """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtZalo").send_keys(self.notregisterphone)
+        self.press_save_button()
+        error = self.driver.find_elements(By.CLASS_NAME, "tblInfo")[1].find_element(By.TAG_NAME, "tbody").find_elements(By.TAG_NAME, "tr")[5].find_elements(By.TAG_NAME, "td")[1].find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần nhập SĐT đã đăng kí zalo")
+
+    def test_FPNNR(self):
+        """Fill phone number registered zalo """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtZalo").send_keys(self.phone)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+    
+    def test_FPNVB(self):
+        """Fill phone number not register Viber  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtViber").send_keys(self.notregisterphone)
+        self.press_save_button()
+        error = self.driver.find_elements(By.CLASS_NAME, "tblInfo")[1].find_element(By.TAG_NAME, "tbody").find_elements(
+            By.TAG_NAME, "tr")[6].find_elements(By.TAG_NAME, "td")[1].find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(error == "Bạn cần nhập SĐT đã đăng kí Viber")
+
+    def test_FPVB(self):
+        """Fill phone number registered Viber"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtViber").send_keys(self.phone)
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_CA(self): 
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
+            By.TAG_NAME, "input").send_keys("E:\HK211\TMDT\\room\BedRoom\\bed2.jpg")
+        self.press_save_button()
+        assert True
+    
+
+    def test_CARIT(self):
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
+            By.TAG_NAME, "input").send_keys("E:\ST_Project_3.pdf")
+        assert True
+
+    def test_DW15(self):
+        self.login_and_goto_profile()
+        time.sleep(15*60)
+        assert False
+
 
 
 
