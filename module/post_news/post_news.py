@@ -51,12 +51,12 @@ class DetailedEstimate(unittest.TestCase):
         
         sb= self.driver.find_element(By.XPATH,"//input[@name='ctl00$LeftMainContent$GuestProductInsert$btnSave']")
         sb.click()
-        time.sleep(1)
+        # time.sleep(1)
         
 
     def check_tieude(self):
         # sb= self.driver.find_elements(By.XPATH,"//input[@name='ctl00$LeftMainContent$GuestProductInsert$txtProductTitle']/following-sibling::div[0]/p")
-        sb = self.driver.find_elements(By.XPATH,"//div[@class='leftArea leftPostArea']/div[2]/div[1]/p[1]")
+        sb = self.driver.find_elements(By.XPATH,"//div[contains(text(),'Số ký tự cần lớn hơn 30')]")
         if len(sb) == 1:
             return False
         return True
@@ -71,7 +71,7 @@ class DetailedEstimate(unittest.TestCase):
 
     def check_thongtin(self):
         # sb= self.driver.find_elements(By.XPATH,"//input[@name='ctl00$LeftMainContent$GuestProductInsert$txtProductTitle']/following-sibling::div[0]/p")
-        sb = self.driver.find_elements(By.XPATH,"//div[@class='leftArea leftPostArea']//div[@class='errorMessage']//p")
+        sb = self.driver.find_elements(By.XPATH,"//p[contains(text(),'Vui lòng nhập tiêu đề tin đăng của bạn. Tối thiểu ')]")
         if len(sb) == 1:
             return False
         return True
@@ -113,14 +113,14 @@ class DetailedEstimate(unittest.TestCase):
 
     def check_didong(self):
         # sb= self.driver.find_elements(By.XPATH,"//input[@name='ctl00$LeftMainContent$GuestProductInsert$txtProductTitle']/following-sibling::div[0]/p")
-        sb = self.driver.find_elements(By.XPATH,"//div[@id='divPostNews']/div[11]/div[0]/div[3]/div[2]/span")
+        sb = self.driver.find_elements(By.XPATH,"//body/form[@id='form1']/div[4]/div[3]/div[5]/div[1]/div[3]/div[12]/div[1]/div[4]/div[2]/span[1]")
         if len(sb) == 1:
             return False
         return True
 
     def check_email(self):
         # sb= self.driver.find_elements(By.XPATH,"//input[@name='ctl00$LeftMainContent$GuestProductInsert$txtProductTitle']/following-sibling::div[0]/p")
-        sb = self.driver.find_elements(By.XPATH,"//div[@id='divPostNews']/div[11]/div[0]/div[4]/div[2]/span")
+        sb = self.driver.find_elements(By.XPATH,"//span[contains(text(),'Vui lòng nhập đúng định dạng Email')]")
         if len(sb) == 1:
             return False
         return True
@@ -219,7 +219,7 @@ class DetailedEstimate(unittest.TestCase):
 
         
         self.pressSubmit()
-        time.sleep(3)
+        # time.sleep(3)
         
 
         #get_attribute() to get value of input box
@@ -243,10 +243,11 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
-        self.assertTrue(self.check_tieude())
+        time.sleep(1)
+        self.assertFalse(self.check_tieude())
 
     def test_T1(self):
-        tieude = False
+        tieude = True
         dientich = True
         thongtin = True
         mattien = True
@@ -257,6 +258,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_tieude())
 
     def test_TNN1(self):
@@ -271,6 +273,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_dientich())
 
     def test_TN1(self):
@@ -285,6 +288,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_dientich())
 
     def test_NT2(self):
@@ -299,6 +303,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_thongtin())
 
     def test_T2(self):
@@ -313,6 +318,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_thongtin())
 
     def test_TN3(self):
@@ -327,6 +333,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_mattien())
 
     def test_TNN3(self):
@@ -341,6 +348,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_mattien())
 
     def test_TN6(self):
@@ -355,6 +363,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_phongngu())
 
     def test_TNN6(self):
@@ -369,6 +378,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_phongngu())
 
     def test_TN4(self):
@@ -383,6 +393,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_duongvao())
 
     def test_TNN4(self):
@@ -397,6 +408,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_duongvao())
 
     def test_TN5(self):
@@ -411,6 +423,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_sotang())
 
     def test_TNN5(self):
@@ -425,6 +438,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_sotang())
 
     def test_TN8(self):
@@ -439,6 +453,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_toilet())
 
     def test_TNN7(self):
@@ -453,6 +468,7 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_toilet())
 
     def test_TN9(self):
@@ -467,7 +483,8 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
-        self.assertTrue(self.check_didong())
+        time.sleep(1)
+        self.assertFalse(self.check_didong())
 
     def test_TNN9(self):
         tieude = True
@@ -481,7 +498,8 @@ class DetailedEstimate(unittest.TestCase):
         didong = False
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
-        self.assertTrue(self.check_didong())
+        time.sleep(1)
+        self.assertFalse(self.check_didong())
 
     def test_TA(self):
         tieude = True
@@ -495,6 +513,8 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = True
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
+
         self.assertTrue(self.check_email())
 
     def test_TNA(self):
@@ -509,13 +529,14 @@ class DetailedEstimate(unittest.TestCase):
         didong = True
         email = False
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
+        time.sleep(1)
         self.assertTrue(self.check_email())
 
     
 
 
     def tearDown(self):
-        time.sleep(3)
+        # time.sleep(3)
         self.driver.quit()
         print("========== [End Test] ==========\n")
 
