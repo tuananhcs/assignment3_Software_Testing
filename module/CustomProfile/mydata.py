@@ -18,3 +18,5 @@ taxcode= "ABC123456"
 phone="0362590315"
 
 notregisterphone = "01234567889"
+
+adress = "HÀ GIANG"

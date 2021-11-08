@@ -29,6 +29,7 @@ class CustomProfile(unittest.TestCase):
         self.taxcode = mydata.taxcode
         self.phone = mydata.phone
         self.notregisterphone = mydata.notregisterphone
+        self.address = mydata.adress
 
 
         cService = Service(ChromeDriverManager().install())
@@ -86,7 +87,8 @@ class CustomProfile(unittest.TestCase):
             By.ID, "txtFullname").clear()
         self.driver.find_element(
             By.ID, "txtFullname").send_keys(self.name)
-        time.sleep(0.5)
+        self.driver.find_element(By.ID, "txtAddress").clear()
+        time.sleep(2)
 
     def clearData(self): 
         self.driver.find_element(By.ID, "ddlWards").find_elements(
@@ -116,8 +118,7 @@ class CustomProfile(unittest.TestCase):
 
     def test_EDP(self): 
         """003"""
-        self.default_name()
-        self.select_default_field()
+        self.login_and_goto_profile()
         assert True
 
     def test_TOB(self):
@@ -383,23 +384,25 @@ class CustomProfile(unittest.TestCase):
         """025 - No select data in "Phường, xã " field"""
         self.login_and_goto_profile()
         self.clearData()
-        self.driver.find_element(By.ID, "ddlCities").find_elements(
-            By.TAG_NAME, "option")[0].click()
-        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
-            By.TAG_NAME, "option")[0].click()
+        self.select_City()
+        self.select_Distric()
         self.default_name()
         self.press_save_button()
-        error = self.driver.find_element(
-            By.ID, "errorCity").get_attribute('innerHTML')
-        self.assertTrue(error == "Bạn cần chọn thông tin")
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
 
     def test_SPX(self):
         """026 - Select data in "Phường, xã " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_City()
-        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
-            By.TAG_NAME, "option")[2].click()
+        self.select_Distric()
+
+        self.driver.find_element(By.ID, "ddlWards").find_elements(
+            By.TAG_NAME, "option")[1].click()
+
         self.default_name()
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
@@ -410,23 +413,23 @@ class CustomProfile(unittest.TestCase):
         """027 - No select data in "Đường, phố " field"""
         self.login_and_goto_profile()
         self.clearData()
-        self.driver.find_element(By.ID, "ddlCities").find_elements(
-            By.TAG_NAME, "option")[0].click()
-        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
-            By.TAG_NAME, "option")[0].click()
+        self.select_City()
+        self.select_Distric()
         self.default_name()
         self.press_save_button()
-        error = self.driver.find_element(
-            By.ID, "errorCity").get_attribute('innerHTML')
-        self.assertTrue(error == "Bạn cần chọn thông tin")
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
 
     def test_SDP(self):
         """028 - Select data in "Đường, phố " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_City()
-        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
-            By.TAG_NAME, "option")[2].click()
+        self.select_Distric()
+        self.driver.find_element(By.ID, "ddlStreets").find_elements(
+            By.TAG_NAME, "option")[1].click()
         self.default_name()
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
@@ -437,23 +440,21 @@ class CustomProfile(unittest.TestCase):
         """029 - Select default "Địa chỉ" """
         self.login_and_goto_profile()
         self.clearData()
-        self.driver.find_element(By.ID, "ddlCities").find_elements(
-            By.TAG_NAME, "option")[0].click()
-        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
-            By.TAG_NAME, "option")[0].click()
+        self.select_City()
+        self.select_Distric()
         self.default_name()
         self.press_save_button()
-        error = self.driver.find_element(
-            By.ID, "errorCity").get_attribute('innerHTML')
-        self.assertTrue(error == "Bạn cần chọn thông tin")
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification =="Thay đổi thông tin thành công !")
 
     def test_FDC(self):
         """030 - Fill in "Địa chỉ" field"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_City()
-        self.driver.find_element(By.ID, "ddlDistricts").find_elements(
-            By.TAG_NAME, "option")[2].click()
+        self.select_Distric()
+        self.driver.find_element(By.ID, "txtAddress").send_keys(self.address)
         self.default_name()
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
@@ -664,10 +665,10 @@ class CustomProfile(unittest.TestCase):
 
     
 
-    # def test_DW15(self):
-    #     self.login_and_goto_profile()
-    #     time.sleep(15*60)
-    #     assert False
+    def test_DW15(self):
+        self.login_and_goto_profile()
+        time.sleep(15*60)
+        assert False
 
 
 
