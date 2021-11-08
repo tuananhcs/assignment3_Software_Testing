@@ -665,10 +665,10 @@ class CustomProfile(unittest.TestCase):
 
     
 
-    def test_DW15(self):
-        self.login_and_goto_profile()
-        time.sleep(15*60)
-        assert False
+    # def test_DW15(self):
+    #     self.login_and_goto_profile()
+    #     time.sleep(15*60)
+    #     assert False
 
 
 
