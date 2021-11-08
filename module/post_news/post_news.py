@@ -530,14 +530,14 @@ class DetailedEstimate(unittest.TestCase):
         email = False
         self.fillForm(tieude,dientich,thongtin,mattien,duongvao,phongngu,sotang,toilet,didong,email)
         time.sleep(1)
-        self.assertTrue(self.check_email())
+        self.assertFalse(self.check_email())
 
     
 
 
     def tearDown(self):
         # time.sleep(3)
-        self.driver.quit()
+        # self.driver.quit()
         print("========== [End Test] ==========\n")
 
 if __name__ == "__main__":
