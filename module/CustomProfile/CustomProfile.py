@@ -59,7 +59,7 @@ class CustomProfile(unittest.TestCase):
             by=By.ID, value="Password").send_keys(self.password)
         self.driver.find_element(
             by=By.CLASS_NAME, value="js__btn-login.re__btn.re__btn-pr-solid--md").click()
-        time.sleep(5)
+        time.sleep(7)
 
         #If valid SDT:
         # self.driver.find_element(By.CLASS_NAME, "sc-hYZPRl.hWTMLh").click()
@@ -98,15 +98,15 @@ class CustomProfile(unittest.TestCase):
         self.driver.find_element(By.ID, "txtZalo").clear()
         self.driver.find_element(By.ID, "txtViber").clear()
         self.driver.find_element(By.ID, "txtTaxCode").clear()
+        self.driver.find_element(By.ID, "MainContent__userPage_ctl00_rdMale").click()
      
     
     def select_default_field(self):
         self.select_City()
         self.select_Distric()
 
-    
-    
-    def test_RLP(self): 
+    def test_RLP(self):
+        """002"""
         self.login_and_goto_profile()
         self.default_name()
         self.select_default_field()
@@ -115,15 +115,17 @@ class CustomProfile(unittest.TestCase):
         assert True
 
     def test_EDP(self): 
+        """003"""
         self.default_name()
         self.select_default_field()
         assert True
 
     def test_TOB(self):
+        """005"""
         assert True
 
     def test_SDT(self):
-        """Edit the same data in any field"""
+        """004 Edit the same data in any field"""
         self.login_and_goto_profile()
         self.select_default_field()
         self.press_save_button()
@@ -135,7 +137,7 @@ class CustomProfile(unittest.TestCase):
 
 
     def test_DF(self):
-        """Don't fill in "Họ và tên" field """
+        """006 Don't fill in "Họ và tên" field """
         self.login_and_goto_profile()
         self.select_default_field()
         self.driver.find_element(By.ID, "txtFullname").clear()
@@ -148,7 +150,7 @@ class CustomProfile(unittest.TestCase):
     
 
     def test_PDF(self):
-        """Press "Họ và tên" field but  don't fill data"""
+        """007 Press "Họ và tên" field but  don't fill data"""
         self.login_and_goto_profile()
         self.select_default_field()
         self.driver.find_element(By.ID, "txtFullname").click()
@@ -159,7 +161,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(error != "Bạn cần nhập thông tin")
 
     def test_FIU(self):
-        """Fill valid "Họ và tên"  """
+        """008 Fill valid "Họ và tên"  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -171,7 +173,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
 
     def test_FIUC1(self):
-        """Fill  "Họ và tên"   with unicode"  """
+        """009 Fill  "Họ và tên"   with unicode"  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -183,7 +185,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
 
     def test_FIUC2(self):
-        """Fill "Họ và tên"   with special character and number"  """
+        """010 Fill "Họ và tên"   with special character and number"  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -195,7 +197,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
 
     def test_FIUC3(self):
-        """Fill  "Họ và tên"   with icon"  """
+        """011 Fill  "Họ và tên"   with icon"  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -209,7 +211,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(error == "Bạn cần nhập thông tin")
 
     def test_FFLN(self):
-        """Fill  "Họ và tên" with hieroglyphics character  """
+        """012 Fill  "Họ và tên" with hieroglyphics character  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -223,8 +225,43 @@ class CustomProfile(unittest.TestCase):
             By.ID, "errorFullName").get_attribute('innerHTML')
         self.assertTrue(error == "Bạn cần nhập lại \"Họ tên\" cho đúng")
 
+    def test_CS(self):
+        """013 - change sex"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.default_name()
+        self.select_default_field()
+        self.driver.find_element(
+            By.ID, "MainContent__userPage_ctl00_rdFemale").click()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_CA(self):
+        """014"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
+            By.TAG_NAME, "input").send_keys("E:\HK211\TMDT\\room\BedRoom\\bed2.jpg")
+        self.press_save_button()
+        assert True
+
+    def test_CARIT(self):
+        """015"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
+            By.TAG_NAME, "input").send_keys("E:\ST_Project_3.pdf")
+        assert True
+
     def test_DFTTG1(self):
-        """Don't fill in "Tên thường gọi" field   """
+        """016 Don't fill in "Tên thường gọi" field   """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -236,7 +273,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
 
     def test_DFTTG2(self):
-        """Press "Tên thường gọi" field but  don't fill data  """
+        """017 - Press "Tên thường gọi" field but  don't fill data  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -248,8 +285,8 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification ==
                         "Thay đổi thông tin thành công !")
        
-    def test_FIU(self):
-        """Fill valid "Tên thường gọi"   """
+    def test_FIUTTG(self):
+        """018 - Fill valid "Tên thường gọi"   """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -261,7 +298,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
 
     def test_DSNS(self):
-        """Don't select "Ngày sinh"   """
+        """019 - Don't select "Ngày sinh"   """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -273,7 +310,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
      
     def test_SNS(self):
-        """Select "Ngày sinh"   """
+        """020 - Select "Ngày sinh"   """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -290,7 +327,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
 
     def test_NSTTP(self):
-        """No select data in "Tỉnh, Thành phố " field"""
+        """021 - No select data in "Tỉnh, Thành phố " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.driver.find_element(By.ID, "ddlCities").find_elements(
@@ -303,7 +340,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(error == "Bạn cần chọn thông tin")
 
     def test_STTP(self):
-        """Select data in "Tỉnh, Thành phố " field"""
+        """022 - Select data in "Tỉnh, Thành phố " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.driver.find_element(By.ID, "ddlCities").find_elements(
@@ -316,7 +353,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification ==
                         "Thay đổi thông tin thành công !")
     def test_NSQH(self):
-        """No select data in "Quận, huyện " field"""
+        """023 - No select data in "Quận, huyện " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.driver.find_element(By.ID, "ddlCities").find_elements(
@@ -330,7 +367,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(error == "Bạn cần chọn thông tin")
 
     def test_SQH(self):
-        """Select data in "Quận, huyện " field"""
+        """024 - Select data in "Quận, huyện " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_City()
@@ -343,7 +380,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification=="Thay đổi thông tin thành công !")
 
     def test_NSPX(self):
-        """No select data in "Phường, xã " field"""
+        """025 - No select data in "Phường, xã " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.driver.find_element(By.ID, "ddlCities").find_elements(
@@ -357,7 +394,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(error == "Bạn cần chọn thông tin")
 
     def test_SPX(self):
-        """Select data in "Phường, xã " field"""
+        """026 - Select data in "Phường, xã " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_City()
@@ -370,7 +407,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification=="Thay đổi thông tin thành công !")
 
     def test_NSDP(self):
-        """No select data in "Đường, phố " field"""
+        """027 - No select data in "Đường, phố " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.driver.find_element(By.ID, "ddlCities").find_elements(
@@ -384,7 +421,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(error == "Bạn cần chọn thông tin")
 
     def test_SDP(self):
-        """Select data in "Đường, phố " field"""
+        """028 - Select data in "Đường, phố " field"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_City()
@@ -397,7 +434,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification=="Thay đổi thông tin thành công !")
 
     def test_SDDC(self):
-        """Select default "Địa chỉ" """
+        """029 - Select default "Địa chỉ" """
         self.login_and_goto_profile()
         self.clearData()
         self.driver.find_element(By.ID, "ddlCities").find_elements(
@@ -411,7 +448,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(error == "Bạn cần chọn thông tin")
 
     def test_FDC(self):
-        """Fill in "Địa chỉ" field"""
+        """030 - Fill in "Địa chỉ" field"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_City()
@@ -425,7 +462,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
 
     def test_DFCMND(self):
-        """Don't fill in "Mã số thuế/CMND" field    """
+        """031- Don't fill in "Mã số thuế/CMND" field    """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -437,7 +474,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
 
     def test_DFFCMND(self):
-        """Press "Mã số thuế/CMND" field but  don't fill data  """
+        """032 -Press "Mã số thuế/CMND" field but  don't fill data  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -449,8 +486,8 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification ==
                         "Thay đổi thông tin thành công !")
 
-    def test_FIU(self):
-        """Fill valid "Mã số thuế/CMND"     """
+    def test_FIUCMND(self):
+        """033 - Fill valid "Mã số thuế/CMND"     """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -462,7 +499,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification == "Thay đổi thông tin thành công !")
 
     def test_DFSIM(self):
-        """Don't fill in "Skype IM" field     """
+        """034 - Don't fill in "Skype IM" field     """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -474,7 +511,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
 
     def test_PSIADFD(self):
-        """Press "Skype IM" field but  don't fill data """
+        """035 - Press "Skype IM" field but  don't fill data """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -486,8 +523,8 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification ==
                         "Thay đổi thông tin thành công !")
 
-    def test_FIU(self):
-        """Fill valid "Skype IM" """
+    def test_FIU2(self):
+        """036 - Fill valid "Skype IM" """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -501,7 +538,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
     
     def test_DFZ(self):
-        """Don't fill in "zalo" field      """
+        """037 - Don't fill in "zalo" field      """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -513,7 +550,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
 
     def test_PDFZ(self):
-        """Press "zalo" field but  don't fill data"""
+        """038 - Press "zalo" field but  don't fill data"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -526,7 +563,7 @@ class CustomProfile(unittest.TestCase):
                         "Thay đổi thông tin thành công !")
 
     def test_FTZ(self):
-        """Fill text in Zalo  """
+        """039 - Fill text in Zalo  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -536,7 +573,7 @@ class CustomProfile(unittest.TestCase):
         assert True
     
     def test_FPNR(self):
-        """Fill phone number not register zalo   """
+        """040 - Fill phone number not register zalo   """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -548,7 +585,7 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(error == "Bạn cần nhập SĐT đã đăng kí zalo")
 
     def test_FPNNR(self):
-        """Fill phone number registered zalo """
+        """041 - Fill phone number registered zalo """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -560,9 +597,44 @@ class CustomProfile(unittest.TestCase):
             By.TAG_NAME, "span").get_attribute('innerHTML')
         self.assertTrue(sucess_notification ==
                         "Thay đổi thông tin thành công !")
-    
+
+    def test_DFV(self):
+        """042 - Don't fill in "Viber" field      """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_PFVDFD(self):
+        """043 - Press "Viber" field but  don't fill data"""
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(By.ID, "txtViber").click()
+        self.press_save_button()
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
+
+    def test_FTIV(self):
+        """044 - Fill text in Viber  """
+        self.login_and_goto_profile()
+        self.clearData()
+        self.select_default_field()
+        self.default_name()
+        self.driver.find_element(
+            By.ID, "txtViber").send_keys("a")
+        assert True
+
     def test_FPNVB(self):
-        """Fill phone number not register Viber  """
+        """045 - Fill phone number not register Viber  """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -571,11 +643,11 @@ class CustomProfile(unittest.TestCase):
             By.ID, "txtViber").send_keys(self.notregisterphone)
         self.press_save_button()
         error = self.driver.find_elements(By.CLASS_NAME, "tblInfo")[1].find_element(By.TAG_NAME, "tbody").find_elements(
-            By.TAG_NAME, "tr")[6].find_elements(By.TAG_NAME, "td")[1].find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
+            By.TAG_NAME, "tr")[5].find_elements(By.TAG_NAME, "td")[1].find_element(By.TAG_NAME, "span").get_attribute('innerHTML')
         self.assertTrue(error == "Bạn cần nhập SĐT đã đăng kí Viber")
 
     def test_FPVB(self):
-        """Fill phone number registered Viber"""
+        """046 - Fill phone number registered Viber """
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
@@ -587,31 +659,15 @@ class CustomProfile(unittest.TestCase):
             By.TAG_NAME, "span").get_attribute('innerHTML')
         self.assertTrue(sucess_notification ==
                         "Thay đổi thông tin thành công !")
-
-    def test_CA(self): 
-        self.login_and_goto_profile()
-        self.clearData()
-        self.select_default_field()
-        self.default_name()
-        self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
-            By.TAG_NAME, "input").send_keys("E:\HK211\TMDT\\room\BedRoom\\bed2.jpg")
-        self.press_save_button()
-        assert True
+    
     
 
-    def test_CARIT(self):
-        self.login_and_goto_profile()
-        self.clearData()
-        self.select_default_field()
-        self.default_name()
-        self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
-            By.TAG_NAME, "input").send_keys("E:\ST_Project_3.pdf")
-        assert True
+    
 
-    def test_DW15(self):
-        self.login_and_goto_profile()
-        time.sleep(15*60)
-        assert False
+    # def test_DW15(self):
+    #     self.login_and_goto_profile()
+    #     time.sleep(15*60)
+    #     assert False
 
 
 
