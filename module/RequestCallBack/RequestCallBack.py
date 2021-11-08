@@ -102,7 +102,6 @@ class DetailedEstimate(unittest.TestCase):
         for x in range(1,100):
             time.sleep(0.1)
             message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
-            print(len(message),x)
             if x == 99:
                 if len(message)!=0: 
                     self.assertTrue(True)
@@ -138,7 +137,6 @@ class DetailedEstimate(unittest.TestCase):
         for x in range(1,100):
             time.sleep(0.1)
             message = self.driver.find_elements(By.ID, "validateFortxtSenderMobile")
-            print(len(message),x)
             if x == 99:
                 if len(message)!=0: 
                     self.assertTrue(True)
