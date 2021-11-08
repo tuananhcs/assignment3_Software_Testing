@@ -434,7 +434,7 @@ class DetailedEstimate(unittest.TestCase):
 
 
     def tearDown(self):
-        time.sleep(3)
+        # time.sleep(3)
         self.driver.quit()
         print("========== [End Test] ==========\n")
 
