@@ -59,7 +59,7 @@ class CustomProfile(unittest.TestCase):
             by=By.ID, value="Password").send_keys(self.password)
         self.driver.find_element(
             by=By.CLASS_NAME, value="js__btn-login.re__btn.re__btn-pr-solid--md").click()
-        time.sleep(7)
+        time.sleep(5)
 
         #If valid SDT:
         # self.driver.find_element(By.CLASS_NAME, "sc-hYZPRl.hWTMLh").click()
