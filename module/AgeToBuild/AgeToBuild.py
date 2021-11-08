@@ -46,7 +46,6 @@ class DetailedEstimate(unittest.TestCase):
         self.fillForm("1960", "2030")
         try:
             divHeader = self.driver.find_element(By.CLASS_NAME, "divHeader").get_attribute("innerHTML")
-            print(divHeader)
             if len(divHeader):
                 self.assertTrue(True)
         except:
