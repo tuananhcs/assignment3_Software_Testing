@@ -61,13 +61,6 @@ class CustomProfile(unittest.TestCase):
         self.driver.find_element(
             by=By.CLASS_NAME, value="js__btn-login.re__btn.re__btn-pr-solid--md").click()
         time.sleep(5)
-
-        #If valid SDT:
-        # self.driver.find_element(By.CLASS_NAME, "sc-hYZPRl.hWTMLh").click()
-        # self.driver.find_elements(
-        #     By.CLASS_NAME, "sc-aKZfe.drkqWO.sc-bUrJUP.ftSKDG")[1].click()
-
-        #If fon't valid SDT
         self.driver.find_elements(By.CLASS_NAME, "user-name")[1].click()
         self.driver.find_element(By.CLASS_NAME, "menu-user-child.show").find_elements(
             By.TAG_NAME, "li")[1].find_element(By.TAG_NAME, "span").click()
@@ -112,7 +105,6 @@ class CustomProfile(unittest.TestCase):
         self.login_and_goto_profile()
         self.default_name()
         self.select_default_field()
-        self.press_save_button()
         self.driver.refresh()
         assert True
 
@@ -249,7 +241,10 @@ class CustomProfile(unittest.TestCase):
         self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
             By.TAG_NAME, "input").send_keys("E:\HK211\TMDT\\room\BedRoom\\bed2.jpg")
         self.press_save_button()
-        assert True
+        sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
+            By.TAG_NAME, "span").get_attribute('innerHTML')
+        self.assertTrue(sucess_notification ==
+                        "Thay đổi thông tin thành công !")
 
     def test_CARIT(self):
         """015"""
@@ -259,7 +254,11 @@ class CustomProfile(unittest.TestCase):
         self.default_name()
         self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
             By.TAG_NAME, "input").send_keys("E:\ST_Project_3.pdf")
-        assert True
+        try: 
+            self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(By.TAG_NAME, "span")
+            assert False
+        except: 
+            assert True
 
     def test_DFTTG1(self):
         """016 Don't fill in "Tên thường gọi" field   """
@@ -384,9 +383,8 @@ class CustomProfile(unittest.TestCase):
         """025 - No select data in "Phường, xã " field"""
         self.login_and_goto_profile()
         self.clearData()
-        self.select_City()
-        self.select_Distric()
         self.default_name()
+        self.select_default_field()
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
             By.TAG_NAME, "span").get_attribute('innerHTML')
@@ -397,13 +395,13 @@ class CustomProfile(unittest.TestCase):
         """026 - Select data in "Phường, xã " field"""
         self.login_and_goto_profile()
         self.clearData()
-        self.select_City()
-        self.select_Distric()
+        self.default_name()
+        self.select_default_field()
 
         self.driver.find_element(By.ID, "ddlWards").find_elements(
             By.TAG_NAME, "option")[1].click()
 
-        self.default_name()
+        
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
             By.TAG_NAME, "span").get_attribute('innerHTML')
@@ -413,9 +411,8 @@ class CustomProfile(unittest.TestCase):
         """027 - No select data in "Đường, phố " field"""
         self.login_and_goto_profile()
         self.clearData()
-        self.select_City()
-        self.select_Distric()
         self.default_name()
+        self.select_default_field()
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
             By.TAG_NAME, "span").get_attribute('innerHTML')
@@ -426,11 +423,10 @@ class CustomProfile(unittest.TestCase):
         """028 - Select data in "Đường, phố " field"""
         self.login_and_goto_profile()
         self.clearData()
-        self.select_City()
-        self.select_Distric()
+        self.default_name()
+        self.select_default_field()
         self.driver.find_element(By.ID, "ddlStreets").find_elements(
             By.TAG_NAME, "option")[1].click()
-        self.default_name()
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
             By.TAG_NAME, "span").get_attribute('innerHTML')
@@ -440,9 +436,8 @@ class CustomProfile(unittest.TestCase):
         """029 - Select default "Địa chỉ" """
         self.login_and_goto_profile()
         self.clearData()
-        self.select_City()
-        self.select_Distric()
         self.default_name()
+        self.select_default_field()
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
             By.TAG_NAME, "span").get_attribute('innerHTML')
@@ -452,10 +447,10 @@ class CustomProfile(unittest.TestCase):
         """030 - Fill in "Địa chỉ" field"""
         self.login_and_goto_profile()
         self.clearData()
-        self.select_City()
-        self.select_Distric()
-        self.driver.find_element(By.ID, "txtAddress").send_keys(self.address)
         self.default_name()
+        self.select_default_field()
+        self.driver.find_element(By.ID, "txtAddress").send_keys(self.address)
+
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
             By.TAG_NAME, "span").get_attribute('innerHTML')
@@ -665,10 +660,11 @@ class CustomProfile(unittest.TestCase):
 
     
 
-    # def test_DW15(self):
-    #     self.login_and_goto_profile()
-    #     time.sleep(15*60)
-    #     assert False
+    def test_DW15(self):
+        """001"""
+        self.login_and_goto_profile()
+        time.sleep(15*60)
+        assert False
 
 
 
