@@ -100,6 +100,14 @@ class CustomProfile(unittest.TestCase):
         self.select_City()
         self.select_Distric()
 
+    
+    def reset_avt(self): 
+        self.driver.find_element(By.CLASS_NAME, "imgdelold").click()
+        self.driver.switch_to.alert.accept()
+        time.sleep(3)
+        self.press_save_button()
+        time.sleep(3)
+
     def test_RLP(self):
         """002"""
         self.login_and_goto_profile()
@@ -231,15 +239,18 @@ class CustomProfile(unittest.TestCase):
             By.TAG_NAME, "span").get_attribute('innerHTML')
         self.assertTrue(sucess_notification ==
                         "Thay đổi thông tin thành công !")
+  
 
     def test_CA(self):
-        """014"""
+        """014 - Change avatar"""
         self.login_and_goto_profile()
         self.clearData()
         self.select_default_field()
         self.default_name()
+        self.reset_avt()
         self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
             By.TAG_NAME, "input").send_keys("E:\HK211\TMDT\\room\BedRoom\\bed2.jpg")
+        time.sleep(7)
         self.press_save_button()
         sucess_notification = self.driver.find_element(By.ID, "MainContent__userPage_ctl00_plInform").find_element(
             By.TAG_NAME, "span").get_attribute('innerHTML')
@@ -252,6 +263,7 @@ class CustomProfile(unittest.TestCase):
         self.clearData()
         self.select_default_field()
         self.default_name()
+        self.reset_avt()
         self.driver.find_element(By.CLASS_NAME, "spanButtonPlaceholder").find_element(
             By.TAG_NAME, "input").send_keys("E:\ST_Project_3.pdf")
         try: 
