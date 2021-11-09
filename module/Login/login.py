@@ -48,7 +48,6 @@ def handle1(driver):
     except:
         assert False
     else:
-        print(txt)
         assert True
     time.sleep(1)
 
@@ -80,59 +79,58 @@ class LoginTesting(unittest.TestCase):
         # self.driver.implicitly_wait(3)
         self.driver.maximize_window()
         print("[Open browser] Open google chrome browser")
-
         print("========== [Begin Test] ==========")
         self.driver.get('https://batdongsan.com.vn/')
-        
+        time.sleep(15)
         self.driver.find_element(by=By.ID, value="kct_login").click()
         time.sleep(5)
     
-    # def test_login_successfull(self):
-    #     self.driver.find_element(by=By.ID, value="UserName").send_keys(self.username)
-    #     self.driver.find_element(by=By.ID, value="Password").send_keys(self.password)
+    def test_login_successfull(self):
+        self.driver.find_element(by=By.ID, value="UserName").send_keys(self.username)
+        self.driver.find_element(by=By.ID, value="Password").send_keys(self.password)
         
-    #     btnLogin = self.driver.find_element(by=By.CLASS_NAME, value="js__btn-login.re__btn.re__btn-pr-solid--md").click()
+        btnLogin = self.driver.find_element(by=By.CLASS_NAME, value="js__btn-login.re__btn.re__btn-pr-solid--md").click()
         
-    #     try:
-    #         if self.driver.title == "Kênh thông tin số 1 về bất động sản - Cập nhật mới nhất tháng 11/2021":
-    #             raise Exception()
-    #         self.driver.find_element(by=By.ID, value="kct_login")
-    #         user = self.driver.find_element(by=By.ID, value="UserName")
-    #     except:
-    #         print(self.driver.title)
-    #         feedback = self.driver.find_elements_by_class_name(
-    #             "js__btn-login.re__btn.re__btn-pr-solid--md")
-    #         print(list(reduce(lambda x, y: x+[y.text], feedback, [])))
-    #         assert False
-    #     else:
-    #         print(self.driver.title)
-    #         print("Username " + user.text)
-    #         assert True
+        try:
+            if self.driver.title == "Kênh thông tin bất động sản - Mua bán nhà đất số 1 Việt Nam":
+                raise Exception()
+            self.driver.find_element(by=By.ID, value="kct_login")
+            user = self.driver.find_element(by=By.ID, value="UserName")
+        except:
+            print(self.driver.title)
+            feedback = self.driver.find_elements_by_class_name(
+                "js__btn-login.re__btn.re__btn-pr-solid--md")
+            print(list(reduce(lambda x, y: x+[y.text], feedback, [])))
+            assert False
+        else:
+            print(self.driver.title)
+            print("Username " + user.text)
+            assert True
         
 
-    # def test_login_wrong_pass(self):
-    #     self.driver.find_element(by=By.ID, value="UserName").send_keys(self.username)
-    #     self.driver.find_element(by=By.ID, value="Password").send_keys(self.password + "abc")
+    def test_login_wrong_pass(self):
+        self.driver.find_element(by=By.ID, value="UserName").send_keys(self.username)
+        self.driver.find_element(by=By.ID, value="Password").send_keys(self.password + "abc")
         
-    #     check_exception1(self.driver)     
+        check_exception1(self.driver)     
 
-    # def test_login_wrong_username(self):
-    #     self.driver.find_element(by=By.ID, value="UserName").send_keys("lamhuy123@hcmut.edu.vn")
-    #     self.driver.find_element(by=By.ID, value="Password").send_keys(self.password)
+    def test_login_wrong_username(self):
+        self.driver.find_element(by=By.ID, value="UserName").send_keys("lamhuy123@hcmut.edu.vn")
+        self.driver.find_element(by=By.ID, value="Password").send_keys(self.password)
         
-    #     check_exception1(self.driver)
+        check_exception1(self.driver)
 
-    # def test_login_empty_password(self):
-    #     self.driver.find_element(by=By.ID, value="UserName").send_keys(self.username)
-    #     self.driver.find_element(by=By.ID, value="Password").send_keys("")
+    def test_login_empty_password(self):
+        self.driver.find_element(by=By.ID, value="UserName").send_keys(self.username)
+        self.driver.find_element(by=By.ID, value="Password").send_keys("")
         
-    #     check_exception(self.driver)
+        check_exception(self.driver)
 
-    # def test_login_empty_email(self):
-    #     self.driver.find_element(by=By.ID, value="UserName").send_keys("")
-    #     self.driver.find_element(by=By.ID, value="Password").send_keys(self.password)
+    def test_login_empty_email(self):
+        self.driver.find_element(by=By.ID, value="UserName").send_keys("")
+        self.driver.find_element(by=By.ID, value="Password").send_keys(self.password)
         
-    #     check_exception(self.driver)
+        check_exception(self.driver)
 
     def test_login_empty_both_2fields(self):
         self.driver.find_element(by=By.ID, value="UserName").send_keys("")
@@ -143,71 +141,78 @@ class LoginTesting(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-# class TestLoginWithFb(unittest.TestCase):
-#     def setUp(self):
-#         self.fbname = fbname
-#         self.fbpass = fbpass
-#         cService = Service(ChromeDriverManager().install())
-#         options = Options()
-#         options.add_argument("--log-level=3")
-#         self.driver = webdriver.Chrome(options=options, service=cService)
-#         # self.driver.implicitly_wait(3)
-#         self.driver.maximize_window()
-#         print("[Open browser] Open google chrome browser")
+class TestLoginWithFB(unittest.TestCase):
+    def setUp(self):
+        self.fbname = fbname
+        self.fbpass = fbpass
+        cService = Service(ChromeDriverManager().install())
+        options = Options()
+        options.add_argument("--log-level=3")
+        self.driver = webdriver.Chrome(options=options, service=cService)
+        self.driver.maximize_window()
+        print("[Open browser] Open google chrome browser")
+        print("========== [Begin Test] ==========")
+        self.driver.get('https://batdongsan.com.vn/')
+        time.sleep(15)
+        self.driver.find_element(by=By.ID, value="kct_login").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="//body/div[25]/div[1]/div[1]/div[2]/div[1]/a[1]").click()
+        time.sleep(10)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+    def test_login_fb(self):
+        self.driver.find_element(by=By.ID, value="email").send_keys(self.fbname)
+        self.driver.find_element(by=By.ID, value="pass").send_keys(self.fbpass)
+        self.driver.find_element(by=By.NAME, value="login").submit()
+        time.sleep(15)
+        self.driver.switch_to.window(self.driver.window_handles[0])
+        time.sleep(5)
+        try:
+            check = self.driver.find_elements(by=By.XPATH, value="//a[contains(text(),'Cửa Hang Athena')]")
+            if not check:
+                raise Exception()
+            self.assertTrue(check)
+        except:
+            assert False
+        else:
+            assert True
+        
+    def tearDown(self):
+        self.driver.quit()
+class TestLoginWithGG(unittest.TestCase):
+    def setUp(self):
+        self.ggname = "huylamthanh4@gmail.com"
+        self.ggpass = "lamhuy213"
+        cService = Service(ChromeDriverManager().install())
+        options = Options()
+        options.add_argument("--log-level=3")
+        self.driver = webdriver.Chrome(options=options, service=cService)
+        self.driver.maximize_window()
+        print("[Open browser] Open google chrome browser")
+        print("========== [Begin Test] ==========")
+        self.driver.get('https://batdongsan.com.vn/')
+        time.sleep(5)
+        self.driver.find_element(by=By.ID, value="kct_login").click()
+        time.sleep(2)
+        self.driver.find_element(by=By.CLASS_NAME, value="re__btn.re__btn-se-border--md.re__btn-icon-left--md.re__form-login-social-btn-google").click()
+        time.sleep(5)
+        
 
-#         print("========== [Begin Test] ==========")
-#         self.driver.get('https://batdongsan.com.vn/')
-#         time.sleep(0.5)
-#         first = self.driver.find_element(By.XPATH, "//div[@id='kct_login']//a[@class='js__login-by-facebook-btn.re__btn re__btn-se-border--md.re__btn-icon-left--md.re__form-login-social-btn-facebook']")
-#         first.click()
-#         time.sleep(2)
-#         self.driver.find_element(by=By.CLASS_NAME, value="re__form-login-social-btn-facebook").click()
-#         time.sleep(5)
-
-#     def test_login_fb(self):
-#         self.driver.find_element(by=By.ID, value="email").send_keys(fbname)
-#         self.driver.find_element(by=By.ID, value="pass").send_keys(fbpass)
+    def test_login_gg(self):
+        self.driver.find_element(by=By.ID, value="identifierId").send_keys(self.ggname)
+        self.driver.find_element(by=By.CLASS_NAME, value="VfPpkd-vQzf8d").click()
+        time.sleep(5)
+        try:
+            check = self.driver.find_elements(by=By.XPATH, value="//span[contains(text(),'Không thể đăng nhập cho bạn')]")
+            if not check:
+                raise Exception()
+            self.assertTrue(check)
+        except:
+            assert False
+        else:
+            assert True
         
-#         btnLogin = self.driver.find_element_by_id("loginbutton").submit()
-        
-#         if "Kênh thông tin số 1 về bất động sản - Cập nhật mới nhất tháng 11/2021"in self.driver.title:
-#             assert True
-#         assert False
-        
-#     def tearDown(self):
-#         self.driver.quit()
-# class TestLoginWithGG(unittest.TestCase):
-#     def setUp(self):
-#         self.fbname = fbname
-#         self.fbpass = fbpass
-#         cService = Service(ChromeDriverManager().install())
-#         options = Options()
-#         options.add_argument("--log-level=3")
-#         self.driver = webdriver.Chrome(options=options, service=cService)
-#         # self.driver.implicitly_wait(3)
-#         self.driver.maximize_window()
-#         print("[Open browser] Open google chrome browser")
-
-#         print("========== [Begin Test] ==========")
-#         self.driver.get('https://batdongsan.com.vn/')
-#         time.sleep(0.5)
-#         self.driver.find_element(by=By.ID, value="kct_login").click()
-#         time.sleep(2)
-#         self.driver.find_element(by=By.CLASS_NAME, value="re__form-login-social-btn-facebook").click()
-#         time.sleep(5)
-
-#     def test_login_fb(self):
-#         self.driver.find_element(by=By.ID, value="email").send_keys(fbname)
-#         self.driver.find_element(by=By.ID, value="pass").send_keys(fbpass)
-        
-#         btnLogin = self.driver.find_element_by_id("loginbutton").submit()
-        
-#         if "Kênh thông tin số 1 về bất động sản - Cập nhật mới nhất tháng 11/2021"in self.driver.title:
-#             assert True
-#         assert False
-        
-#     def tearDown(self):
-#         self.driver.quit()
+    def tearDown(self):
+        self.driver.quit()
 
 if __name__ == '__main__':
     unittest.main()

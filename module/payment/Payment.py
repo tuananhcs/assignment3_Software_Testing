@@ -47,64 +47,64 @@ class PaymentTesting(unittest.TestCase):
         self.driver.find_element(by=By.ID, value="Password").send_keys(self.password)
         btnLogin = self.driver.find_element(by=By.CLASS_NAME, value="js__btn-login.re__btn.re__btn-pr-solid--md").click()
         time.sleep(5)
-    # def testXYZ1(self):
-    #     """Correct all field"""
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.ID, value="txtMoney").send_keys("30000")
-    #     self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("30000")
-    #     self.driver.find_element(by=By.ID, value="btnSave").click()
-    #     time.sleep(5)
-        # try:
-        #     fieldValidator = self.driver.switch_to.alert
-        #     fieldValidator.accept()
-        #     self.assertTrue(fieldValidator.text == "Bạn nhập mã an toàn không hợp lệ")
-        # except:
-        #     print(self.driver.title)
-        #     assert False
-        # finally:
-        #     print(fieldValidator.text)
-        #     assert True
-    # def testXYZ2(self):
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.ID, value="txtMoney").send_keys("300")
-    #     self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("30000")
-    #     self.driver.find_element(by=By.ID, value="btnSave").click()
-    #     time.sleep(5)
-        # try:
-        #     fieldValidator = self.driver.switch_to.alert
-        #     self.assertTrue(fieldValidator.text == "Bạn nhập mã an toàn không hợp lệ")
-        #     fieldValidator.accept()
-        # except:
-        #     print(self.driver.title)
-        #     assert False
-        # finally:
-        #     print(fieldValidator.text)
-        #     assert True
-    # def testXYZ3(self):
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.ID, value="txtMoney").send_keys("3000")
-    #     # Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")        
-    #     self.driver.find_element(by=By.ID, value="btnSave").click()
-    #     time.sleep(5)
-        # try:
-        #     fieldValidator = self.driver.switch_to.alert
-        #     self.assertTrue(fieldValidator.text == "Bạn nhập mã an toàn không hợp lệ")
-        #     fieldValidator.accept()
-        # except:
-        #     print(self.driver.title)
-        #     assert False
-        # finally:
-        #     print(fieldValidator.text)
-        #     assert True
+    def testXYZ1(self):
+        """Correct all field"""
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.ID, value="txtMoney").send_keys("30000")
+        self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("30000")
+        self.driver.find_element(by=By.ID, value="btnSave").click()
+        time.sleep(5)
+        try:
+            fieldValidator = self.driver.switch_to.alert
+            fieldValidator.accept()
+            self.assertTrue(fieldValidator.text == "Bạn cần nhập mã an toàn")
+        except:
+            print(self.driver.title)
+            assert False
+        finally:
+            print(fieldValidator.text)
+            assert True
+    def testXYZ2(self):
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.ID, value="txtMoney").send_keys("300")
+        self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("30000")
+        self.driver.find_element(by=By.ID, value="btnSave").click()
+        time.sleep(5)
+        try:
+            fieldValidator = self.driver.switch_to.alert
+            self.assertTrue(fieldValidator.text == "Bạn cần nhập mã an toàn")
+            fieldValidator.accept()
+        except:
+            print(self.driver.title)
+            assert False
+        finally:
+            print(fieldValidator.text)
+            assert True
+    def testXYZ3(self):
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.ID, value="txtMoney").send_keys("3000")
+        # Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")        
+        self.driver.find_element(by=By.ID, value="btnSave").click()
+        time.sleep(5)
+        try:
+            fieldValidator = self.driver.switch_to.alert
+            self.assertTrue(fieldValidator.text == "Bạn cần nhập mã an toàn")
+            fieldValidator.accept()
+        except:
+            print(self.driver.title)
+            assert False
+        finally:
+            print(fieldValidator.text)
+            assert True
     def testXYZ4(self):
         self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
         time.sleep(5)
@@ -117,7 +117,7 @@ class PaymentTesting(unittest.TestCase):
         time.sleep(5)
         try:
             fieldValidator = self.driver.switch_to.alert
-            self.assertTrue(fieldValidator.text == "Bạn nhập mã an toàn không hợp lệ")
+            self.assertTrue(fieldValidator.text == "Bạn cần nhập mã an toàn")
             fieldValidator.accept()
         except:
             print(self.driver.title)
@@ -125,96 +125,95 @@ class PaymentTesting(unittest.TestCase):
         finally:
             print(fieldValidator.text)
             assert True
-    # def testXYZ5(self):
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.ID, value="txtMoney").send_keys("30000")
-    #     Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")  
-    #     self.driver.find_element(by=By.ID, value="secode").send_keys("ABCE")  
-    #     self.driver.find_element(by=By.ID, value="btnSave").click()
-    #     time.sleep(5)
-    #     try:
-    #         fieldValidator = self.driver.find_element(by=By.CLASS_NAME, value="errormessage")
-    #         self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Bạn nhập mã an toàn không hợp lệ")
-    #     except:
-    #         print(self.driver.title)
-    #         assert False
-    #     finally:
-    #         print(fieldValidator.text)
-    #         assert True
-    # def testXYZ6(self):
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
-    #     time.sleep(2)
-    #     self.driver.find_element(by=By.ID, value="txtMoney").send_keys("900000000")
-    #     time.sleep(2)
-    #     Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")  
-    #     self.driver.find_element(by=By.ID, value="secode").send_keys("ABCE")  
-    #     self.driver.find_element(by=By.ID, value="btnSave").click()
-    #     time.sleep(2)
-    #     try:
-    #         fieldValidator = self.driver.find_element(by=By.CLASS_NAME, value="errormessage")
-    #         self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Số tiền bạn nhập nhỏ hơn 10.000")
-    #     except:
-    #         print(self.driver.title)
-    #         assert False
-    #     finally:
-    #         print(fieldValidator.text)
-    #         assert True
-    # def testXYZ7(self):
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.ID, value="txtMoney").send_keys("300")
-    #     self.driver.find_element(by=By.ID, value="btnSave").click()
-    #     time.sleep(5)
-    #     aler1 = self.driver.switch_to.alert.accept() 
-    #     assert True
-    # def testXYZ8(self):
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
-    #     time.sleep(2)
-    #     self.driver.find_element(by=By.ID, value="txtMoney").send_keys("900000000")
-    #     time.sleep(2)
-    #     Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")  
-    #     self.driver.find_element(by=By.ID, value="secode").send_keys("ABCE")  
-    #     self.driver.find_element(by=By.ID, value="btnSave").click()
-    #     time.sleep(2)
-    #     try:
-    #         fieldValidator = self.driver.find_element(by=By.CLASS_NAME, value="errormessage")
-    #         self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Bạn không được nhập số tiền lớn hơn 100.000.000")
-    #     except:
-    #         print(self.driver.title)
-    #         assert False
-    #     finally:
-    #         print(fieldValidator.text)
-    #         assert True
-    # def testXYZ9(self):
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
-    #     time.sleep(5)
-    #     self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
-    #     time.sleep(2)
-    #     self.driver.find_element(by=By.ID, value="txtMoney").send_keys("100.2")
-    #     time.sleep(2)
-    #     Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")  
-    #     self.driver.find_element(by=By.ID, value="secode").send_keys("ABCE")  
-    #     self.driver.find_element(by=By.ID, value="btnSave").click()
-    #     time.sleep(2)
-    #     try:
-    #         fieldValidator = self.driver.find_element(by=By.CLASS_NAME, value="errormessage")
-    #         self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Số tiền bạn nhập nhỏ hơn 10.000")
-    #     except:
-    #         print(self.driver.title)
-    #         assert False
-    #     finally:
-    #         print(fieldValidator.text)
-    #         assert True
-
+    def testXYZ5(self):
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.ID, value="txtMoney").send_keys("30000")
+        Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")  
+        self.driver.find_element(by=By.ID, value="secode").send_keys("ABCE")  
+        self.driver.find_element(by=By.ID, value="btnSave").click()
+        time.sleep(5)
+        try:
+            fieldValidator = self.driver.find_element(by=By.CLASS_NAME, value="errormessage")
+            self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Bạn nhập mã an toàn không hợp lệ")
+        except:
+            print(self.driver.title)
+            assert False
+        finally:
+            print(fieldValidator.text)
+            assert True
+    def testXYZ6(self):
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
+        time.sleep(2)
+        self.driver.find_element(by=By.ID, value="txtMoney").send_keys("abc")
+        time.sleep(2)
+        Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")  
+        self.driver.find_element(by=By.ID, value="secode").send_keys("ABCE")  
+        self.driver.find_element(by=By.ID, value="btnSave").click()
+        time.sleep(2)
+        try:
+            fieldValidator = self.driver.find_element(by=By.CLASS_NAME, value="errormessage")
+            self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Số tiền bạn nhập nhỏ hơn 10.000")
+        except:
+            print(self.driver.title)
+            assert False
+        finally:
+            print(fieldValidator.text)
+            assert True
+    def testXYZ7(self):
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.ID, value="txtMoney").send_keys("300")
+        self.driver.find_element(by=By.ID, value="btnSave").click()
+        time.sleep(5)
+        aler1 = self.driver.switch_to.alert.accept() 
+        assert True
+    def testXYZ8(self):
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
+        time.sleep(2)
+        self.driver.find_element(by=By.ID, value="txtMoney").send_keys("900000000")
+        time.sleep(2)
+        Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")  
+        self.driver.find_element(by=By.ID, value="secode").send_keys("ABCE")  
+        self.driver.find_element(by=By.ID, value="btnSave").click()
+        time.sleep(2)
+        try:
+            fieldValidator = self.driver.find_element(by=By.CLASS_NAME, value="errormessage")
+            self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Bạn không được nhập số tiền lớn hơn 100.000.000")
+        except:
+            print(self.driver.title)
+            assert False
+        finally:
+            print(fieldValidator.text)
+            assert True
+    def testXYZ9(self):
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[1]/div[2]/a[1]/button[1]").click()
+        time.sleep(5)
+        self.driver.find_element(by=By.XPATH, value="/html[1]/body[1]/form[1]/div[4]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/img[1]").click()
+        time.sleep(2)
+        self.driver.find_element(by=By.ID, value="txtMoney").send_keys("100.2")
+        time.sleep(2)
+        Amount = self.driver.find_element(by=By.ID, value="txtOrderDescription").send_keys("abc")  
+        self.driver.find_element(by=By.ID, value="secode").send_keys("ABCE")  
+        self.driver.find_element(by=By.ID, value="btnSave").click()
+        time.sleep(2)
+        try:
+            fieldValidator = self.driver.find_element(by=By.CLASS_NAME, value="errormessage")
+            self.assertTrue(fieldValidator.get_attribute("innerHTML") == "Số tiền bạn nhập nhỏ hơn 10.000")
+        except:
+            print(self.driver.title)
+            assert False
+        finally:
+            print(fieldValidator.text)
+            assert True
     
     def tearDown(self):
         self.driver.quit()

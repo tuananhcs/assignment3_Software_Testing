@@ -17,8 +17,8 @@ def gen_email():
 username="huy.lam2214@hcmut.edu.vn"
 password="Lamhuy213"
 #fb ACCOUNT
-fbname="0359596544"
-fbpass="con@n2001"
+fbname="ctvlamson@gmail.com"
+fbpass="lamson213"
 #register fields
 fname = "Nam"
 lname = "Tran"
