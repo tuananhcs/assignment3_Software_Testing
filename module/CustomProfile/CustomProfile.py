@@ -668,10 +668,6 @@ class CustomProfile(unittest.TestCase):
         self.assertTrue(sucess_notification ==
                         "Thay đổi thông tin thành công !")
     
-    
-
-    
-
     def test_DW15(self):
         """001"""
         self.login_and_goto_profile()
