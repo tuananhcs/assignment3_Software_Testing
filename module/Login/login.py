@@ -28,14 +28,13 @@ Please change self.driver path for the successful runtime.
 """ 
 def handle(driver):
     try:
-        feedback2 = driver.find_elements(by=By.CLASS_NAME, value="field-validation-error")
+        feedback2 = driver.find_elements(by=By.CLASS_NAME, value="js__other-errors.re__other-errors")
         txt = list(reduce(lambda x, y: x+[y.text], feedback2, []))
         if not txt:
             raise Exception()
     except:
         assert False
     else:
-        print(txt)
         assert True
     time.sleep(1)
 
@@ -90,21 +89,15 @@ class LoginTesting(unittest.TestCase):
         self.driver.find_element(by=By.ID, value="Password").send_keys(self.password)
         
         btnLogin = self.driver.find_element(by=By.CLASS_NAME, value="js__btn-login.re__btn.re__btn-pr-solid--md").click()
-        
+        time.sleep(5)
         try:
-            if self.driver.title == "Kênh thông tin bất động sản - Mua bán nhà đất số 1 Việt Nam":
+            check = self.driver.find_elements(by=By.XPATH, value="//div[contains(text(),'Huy Lâm Thành')]")
+            if not check:
                 raise Exception()
-            self.driver.find_element(by=By.ID, value="kct_login")
-            user = self.driver.find_element(by=By.ID, value="UserName")
+            self.assertTrue(check)
         except:
-            print(self.driver.title)
-            feedback = self.driver.find_elements_by_class_name(
-                "js__btn-login.re__btn.re__btn-pr-solid--md")
-            print(list(reduce(lambda x, y: x+[y.text], feedback, [])))
             assert False
         else:
-            print(self.driver.title)
-            print("Username " + user.text)
             assert True
         
 
@@ -178,41 +171,41 @@ class TestLoginWithFB(unittest.TestCase):
         
     def tearDown(self):
         self.driver.quit()
-# class TestLoginWithGG(unittest.TestCase):
-#     def setUp(self):
-#         self.ggname = "huylamthanh4@gmail.com"
-#         self.ggpass = "lamhuy213"
-#         cService = Service(ChromeDriverManager().install())
-#         options = Options()
-#         options.add_argument("--log-level=3")
-#         self.driver = webdriver.Chrome(options=options, service=cService)
-#         self.driver.maximize_window()
-#         print("[Open browser] Open google chrome browser")
-#         print("========== [Begin Test] ==========")
-#         self.driver.get('https://batdongsan.com.vn/')
-#         time.sleep(5)
-#         self.driver.find_element(by=By.ID, value="kct_login").click()
-#         time.sleep(2)
-#         self.driver.find_element(by=By.CLASS_NAME, value="re__btn.re__btn-se-border--md.re__btn-icon-left--md.re__form-login-social-btn-google").click()
-#         time.sleep(5)
+class TestLoginWithGG(unittest.TestCase):
+    def setUp(self):
+        self.ggname = "huylamthanh4@gmail.com"
+        self.ggpass = "lamhuy213"
+        cService = Service(ChromeDriverManager().install())
+        options = Options()
+        options.add_argument("--log-level=3")
+        self.driver = webdriver.Chrome(options=options, service=cService)
+        self.driver.maximize_window()
+        print("[Open browser] Open google chrome browser")
+        print("========== [Begin Test] ==========")
+        self.driver.get('https://batdongsan.com.vn/')
+        time.sleep(5)
+        self.driver.find_element(by=By.ID, value="kct_login").click()
+        time.sleep(2)
+        self.driver.find_element(by=By.CLASS_NAME, value="re__btn.re__btn-se-border--md.re__btn-icon-left--md.re__form-login-social-btn-google").click()
+        time.sleep(5)
         
 
-#     def test_login_gg(self):
-#         self.driver.find_element(by=By.ID, value="identifierId").send_keys(self.ggname)
-#         self.driver.find_element(by=By.CLASS_NAME, value="VfPpkd-vQzf8d").click()
-#         time.sleep(5)
-#         try:
-#             check = self.driver.find_elements(by=By.XPATH, value="//span[contains(text(),'Không thể đăng nhập cho bạn')]")
-#             if not check:
-#                 raise Exception()
-#             self.assertTrue(check)
-#         except:
-#             assert False
-#         else:
-#             assert True
+    def test_login_gg(self):
+        self.driver.find_element(by=By.ID, value="identifierId").send_keys(self.ggname)
+        self.driver.find_element(by=By.CLASS_NAME, value="VfPpkd-vQzf8d").click()
+        time.sleep(5)
+        try:
+            check = self.driver.find_elements(by=By.XPATH, value="//span[contains(text(),'Không thể đăng nhập cho bạn')]")
+            if not check:
+                raise Exception()
+            self.assertTrue(check)
+        except:
+            assert False
+        else:
+            assert True
         
-#     def tearDown(self):
-#         self.driver.quit()
+    def tearDown(self):
+        self.driver.quit()
 
 if __name__ == '__main__':
     unittest.main()
